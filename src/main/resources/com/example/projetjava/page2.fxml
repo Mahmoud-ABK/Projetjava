@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.gluonhq.charm.glisten.control.Avatar?>
-<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <?import java.lang.String?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Button?>
@@ -11,16 +9,18 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" styleClass="white-bg" stylesheets="@stylesheet2.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" styleClass="white-bg" stylesheets="@stylesheet2.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjava.page2Controller">
    <children>
       <AnchorPane layoutX="1100.0" layoutY="600.0" prefHeight="478.0" prefWidth="763.0">
          <children>
@@ -35,9 +35,19 @@
                                     <Font name="Tahoma" size="18.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="close" layoutX="1346.0" layoutY="-1.0" mnemonicParsing="false" textFill="WHITE" />
-                              <FontAwesomeIcon glyphName="USERS" layoutX="27.0" layoutY="32.0" size="2em" />
-                              <FontAwesomeIcon glyphName="CLOSE" layoutX="1377.0" layoutY="31.0" size="2em" />
+                              <Button fx:id="close" layoutX="1346.0" layoutY="-1.0" mnemonicParsing="false" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="18.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/cancel_music_close_cross_icon_123879.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <ImageView fitHeight="29.0" fitWidth="47.0" layoutX="26.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/group-profile-users_icon-icons.com_73540.png" />
+                                 </image>
+                              </ImageView>
                            </children></AnchorPane>
                      </children>
                   </AnchorPane>
@@ -47,11 +57,6 @@
                      <children>
                         <AnchorPane fx:id="RIGHT" layoutY="-1.0" prefHeight="541.0" prefWidth="240.0" styleClass="NAV-FORM" stylesheets="@stylesheet2.css" AnchorPane.bottomAnchor="14.600000000000023" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-40.0" AnchorPane.topAnchor="-1.0">
                            <children>
-                              <Avatar layoutX="70.0" layoutY="41.0" radius="50.0">
-                                 <image>
-                                    <Image url="@../../../../../../../../OneDrive/Desktop/java%20projet/icone.png" />
-                                 </image>
-                              </Avatar>
                               <Label fx:id="WELCO" layoutX="46.0" layoutY="141.0" text="Welcome">
                                  <font>
                                     <Font name="Tahoma Bold" size="32.0" />
@@ -74,12 +79,12 @@
                                  </textFill>
                               </Label>
                               <Line endX="87.00004577636719" endY="-1.52587890625E-5" layoutX="132.0" layoutY="185.0" startX="-111.0" startY="-7.62939453125E-6" stroke="WHITE" />
-                              <Button fx:id="bouton" layoutX="20.0" layoutY="213.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="ACCEUIL" wrapText="true">
+                              <Button fx:id="Acceuil_btn" layoutX="20.0" layoutY="213.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="ACCEUIL" wrapText="true">
                                  <font>
                                     <Font name="Tahoma" size="13.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="bouton" layoutX="20.0" layoutY="259.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="ETUDIANT">
+                              <Button fx:id="Etudiant_btn" layoutX="20.0" layoutY="259.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="ETUDIANT">
                                  <font>
                                     <Font name="Tahoma" size="13.0" />
                                  </font>
@@ -99,11 +104,17 @@
                                     <Font name="Tahoma" size="13.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="bouton" layoutX="20.0" layoutY="447.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" text="SOUTENANCE">
+                              <Button fx:id="bouton" layoutX="20.0" layoutY="447.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="200.0" text="SOUTENANCE">
                                  <font>
                                     <Font name="Tahoma" size="13.0" />
                                  </font>
                               </Button>
+                              <ImageView fitHeight="120.0" fitWidth="143.0" layoutX="60.0" layoutY="18.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Images/icone.png" />
+                                 </image>
+                              </ImageView>
+                              <Circle fill="#1f93ff00" layoutX="121.0" layoutY="78.0" radius="63.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" />
                            </children>
                         </AnchorPane>
                      </children>
@@ -112,7 +123,7 @@
                <center>
                   <AnchorPane prefHeight="754.0" prefWidth="1169.0" BorderPane.alignment="CENTER">
                      <children>
-                        <AnchorPane layoutX="60.0" layoutY="18.0" prefHeight="230.0" prefWidth="1118.0" stylesheets="@stylesheet2.css" visible="false">
+                        <AnchorPane fx:id="Acceuil_form" layoutX="60.0" layoutY="18.0" prefHeight="230.0" prefWidth="1118.0" stylesheets="@stylesheet2.css">
                            <styleClass>
                               <String fx:value="white-bg" />
                               <String fx:value="shadow" />
@@ -124,7 +135,6 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <FontAwesomeIcon glyphName="USERS" layoutX="45.0" layoutY="104.0" size="6em" wrappingWidth="15.85003662109375" />
                                     <Label layoutX="86.0" layoutY="149.0" text="TOTAL ETUDIANTS" textFill="WHITE">
                                        <font>
                                           <Font name="Tahoma" size="20.0" />
@@ -135,6 +145,11 @@
                                           <Font name="Arial" size="41.0" />
                                        </font>
                                     </Label>
+                                    <ImageView fitHeight="112.0" fitWidth="131.0" layoutX="41.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/group-profile-users_icon-icons.com_73540.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="395.0" layoutY="15.0" prefHeight="200.0" prefWidth="330.0" stylesheets="@stylesheet2.css">
@@ -143,8 +158,12 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <FontAwesomeIcon fill="#1cd94b" glyphName="CHECK" layoutX="42.0" layoutY="110.0" selectionFill="#0fe75b" size="6em" text="" wrappingWidth="15.85003662109375" />
-                                    <Label layoutX="83.0" layoutY="155.0" text="TOTAL AFFECTES" textFill="#ff2929">
+                                    <ImageView fitHeight="115.0" fitWidth="106.0" layoutX="42.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/Tick_Mark_icon-icons.com_69146.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Label layoutX="83.0" layoutY="155.0" text="TOTAL AFFECTES" textFill="WHITE">
                                        <font>
                                           <Font name="Tahoma" size="20.0" />
                                        </font>
@@ -162,7 +181,6 @@
                                     <String fx:value="shadow" />
                                  </styleClass>
                                  <children>
-                                    <FontAwesomeIcon fill="RED" glyphName="CLOSE" layoutX="42.0" layoutY="106.0" selectionFill="RED" size="6em" wrappingWidth="15.85003662109375" />
                                     <Label layoutX="63.0" layoutY="152.0" text="TOTAL NON AFFECTES" textFill="WHITE">
                                        <font>
                                           <Font name="Tahoma" size="20.0" />
@@ -173,11 +191,16 @@
                                           <Font name="Arial" size="41.0" />
                                        </font>
                                     </Label>
+                                    <ImageView fitHeight="108.0" fitWidth="111.0" layoutX="47.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Images/Close_Icon_icon-icons.com_69144.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="52.0" layoutY="9.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css">
+                        <AnchorPane fx:id="Etudiant_form" layoutX="52.0" layoutY="9.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css" visible="false">
                            <children>
                               <AnchorPane layoutX="12.0" layoutY="10.0" prefHeight="263.0" prefWidth="1110.0">
                                  <styleClass>
@@ -229,7 +252,11 @@
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <FontAwesomeIcon glyphName="PLUS" />
+                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                             </image>
+                                          </ImageView>
                                        </graphic>
                                     </Button>
                                  </children>
@@ -253,12 +280,20 @@
                                           <TableColumn prefWidth="217.59991455078125" text="Filière" />
                                           <TableColumn prefWidth="65.5999755859375">
                                              <graphic>
-                                                <FontAwesomeIcon glyphName="EDIT" size="1.5em" />
+                                                <ImageView fitHeight="27.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Images/edit_modify_icon-icons.com_72390.png" />
+                                                   </image>
+                                                </ImageView>
                                              </graphic>
                                           </TableColumn>
                                           <TableColumn prefWidth="68.800048828125">
                                              <graphic>
-                                                <FontAwesomeIcon glyphName="TRASH" size="1.5em" textAlignment="CENTER" />
+                                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@Images/trash_bin_icon-icons.com_67981.png" />
+                                                   </image>
+                                                </ImageView>
                                              </graphic>
                                           </TableColumn>
                                       </columns>
@@ -268,7 +303,11 @@
                                           <Font size="24.0" />
                                        </font>
                                     </TextField>
-                                    <FontAwesomeIcon glyphName="SEARCH" layoutX="257.0" layoutY="46.0" size="2em" />
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="253.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../../../../../Downloads/3844432-magnifier-search-zoom_110300.png" />
+                                       </image>
+                                    </ImageView>
                                  </children>
                               </AnchorPane>
                            </children>

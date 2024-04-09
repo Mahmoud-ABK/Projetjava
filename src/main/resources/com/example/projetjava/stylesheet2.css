@@ -3,10 +3,7 @@
     -fx-border-color: #000;
     -fx-border-width: .4px 0px .4px .4px;
 }
-#close{
-    -fx-background-color: transprent;
-    -fx-cursor: hand;
-}
+
 .button{
     -fx-background-color: TRANSPARENT;
     -fx-cursor: hand;
@@ -55,4 +52,8 @@
 }
 #ajoutetudiant1{
     -fx-text-fill : #ac156e;
+}
+
+#plus{
+    -fx-font-size: 150px;
 }
