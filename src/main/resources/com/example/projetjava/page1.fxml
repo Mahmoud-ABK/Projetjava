@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjava.page1Controller">
+   <children>
+      <AnchorPane fx:id="fond" prefHeight="410.0" prefWidth="622.0" stylesheets="@stylesheet.css">
+         <children>
+            <ImageView fitHeight="800.0" fitWidth="789.0" layoutX="29.600000000000023" layoutY="-11.799999999999999" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="597.1737426757812" AnchorPane.topAnchor="-11.799999999999999">
+               <image>
+                  <Image url="@../../../../../../../../OneDrive/Desktop/fddgdt.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="763.0" layoutY="243.0" prefHeight="124.0" prefWidth="590.0" stylesheets="@stylesheet.css" text="Gestion des Projets de&#10;Fin d'étude" textAlignment="CENTER" textFill="#ac156e">
+               <font>
+                  <Font name="System Bold" size="48.0" />
+               </font>
+            </Label>
+            <Button fx:id="welcome" layoutX="933.0" layoutY="456.0" mnemonicParsing="false" onAction="#switchScene" prefHeight="60.0" prefWidth="250.0" stylesheets="@stylesheet.css" text="Welcome" textFill="WHITE">
+               <font>
+                  <Font name="Tahoma Bold" size="37.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="136.0" fitWidth="182.0" layoutX="1218.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+               <image>
+                  <Image url="@../../../../../../../../OneDrive/Desktop/unnamed.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

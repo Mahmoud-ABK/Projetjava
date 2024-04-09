@@ -1,0 +1,13 @@
+#fond{
+    -fx-background-color:linear-gradient( to top right, #fff, #fff);
+    -fx-border-color: #000;
+    -fx-border-width: .4px 0px .4px .4px;
+}
+
+#welcome{
+    -fx-background-color: #458BE3;
+    -fx-cursor: hand;
+}
+#welcome:hover{
+    -fx-background-color: #0F50A2;
+}

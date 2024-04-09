@@ -1,0 +1,58 @@
+#TOP{
+    -fx-background-color:linear-gradient( to top RIGHT, #0F50A2, #A4D8FF);
+    -fx-border-color: #000;
+    -fx-border-width: .4px 0px .4px .4px;
+}
+#close{
+    -fx-background-color: transprent;
+    -fx-cursor: hand;
+}
+.button{
+    -fx-background-color: TRANSPARENT;
+    -fx-cursor: hand;
+    -fx-font-weight: bold;
+}
+.NAV-FORM{
+    -fx-background-color:linear-gradient( to BOTTOM right, #0F50A2, #A4D8FF);
+    -fx-border-color: #000;
+    -fx-border-width: .4px 0px .4px .4px;
+}
+#WELCO{
+    -fx-text-fill : #FFF;
+}
+#ajoutetudiant{
+    -fx-text-fill : #ac156e;
+}
+.shadow{
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,5), 6,0,0,0);
+}
+.white-bg{
+    -fx-background-color: #fff;
+    -fx-background-radius: 8px;
+}
+
+.carte{
+    -fx-background-color:linear-gradient( to BOTTOM right, #A4D8FF, #A4D8FF);
+    -fx-border-color: #000;
+    -fx-border-width: .4px 0px .4px .4px;
+}
+#boutonajout{
+    -fx-background-color: #ac156e;
+    -fx-cursor: hand;
+    -fx-text-fill : #FFF;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+#titre{
+    -fx-text-fill : #FFF;
+}
+#boutonajout1{
+    -fx-background-color: #ac156e;
+    -fx-cursor: hand;
+    -fx-text-fill : #FFF;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+}
+#ajoutetudiant1{
+    -fx-text-fill : #ac156e;
+}
