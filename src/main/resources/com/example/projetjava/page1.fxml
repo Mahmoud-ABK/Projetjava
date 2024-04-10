@@ -10,19 +10,19 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projetjava.page1Controller">
    <children>
-      <AnchorPane fx:id="fond" prefHeight="410.0" prefWidth="622.0" stylesheets="@stylesheet.css">
+      <AnchorPane fx:id="fond" prefHeight="410.0" prefWidth="622.0" stylesheets="@stylesheet1.css">
          <children>
             <ImageView fitHeight="790.0" fitWidth="773.0" layoutX="38.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="598.4390869140625" AnchorPane.topAnchor="14.0">
                <image>
                   <Image url="@Images/fddgdt.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="763.0" layoutY="243.0" prefHeight="124.0" prefWidth="590.0" stylesheets="@stylesheet.css" text="Gestion des Projets de&#10;Fin d'étude" textAlignment="CENTER" textFill="#ac156e">
+            <Label alignment="CENTER" layoutX="763.0" layoutY="243.0" prefHeight="124.0" prefWidth="590.0" stylesheets="@stylesheet1.css" text="Gestion des Projets de&#10;Fin d'étude" textAlignment="CENTER" textFill="#ac156e">
                <font>
                   <Font name="System Bold" size="48.0" />
                </font>
             </Label>
-            <Button fx:id="welcome" layoutX="933.0" layoutY="456.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="60.0" prefWidth="250.0" stylesheets="@stylesheet.css" text="Welcome" textFill="WHITE">
+            <Button fx:id="welcome" layoutX="933.0" layoutY="456.0" mnemonicParsing="false" onAction="#switchToScene2" prefHeight="60.0" prefWidth="250.0" stylesheets="@stylesheet1.css" text="Welcome" textFill="WHITE">
                <font>
                   <Font name="Tahoma Bold" size="37.0" />
                </font>
