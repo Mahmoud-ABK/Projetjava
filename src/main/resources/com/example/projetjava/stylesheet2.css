@@ -4,15 +4,15 @@
     -fx-border-width: .4px 0px .4px .4px;
 }
 
+#Acceuil_btn{
+    -fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF);
+}
+
 .button {
     -fx-background-color: TRANSPARENT;
     -fx-cursor: hand;
     -fx-font-weight: bold;
     -fx-background-insets: 0, 1, 2, 3;
-}
-
-.button:pressed {
-    -fx-background-color: derive(-fx-body-color, -20%), -fx-outer-border, -fx-inner-border, derive(-fx-body-color, -40%); /* Darker color when pressed */
 }
 
 .NAV-FORM{

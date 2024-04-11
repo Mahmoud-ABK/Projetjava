@@ -46,9 +46,13 @@ public class page2Controller {
         if(event.getSource() == Acceuil_btn) {
             Acceuil_form.setVisible(true);
             Etudiant_form.setVisible(false);
+            Acceuil_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
+            Etudiant_btn.setStyle("-fx-background-color: transparent");
         }else if(event.getSource() == Etudiant_btn) {
             Acceuil_form.setVisible(false);
             Etudiant_form.setVisible(true);
+            Etudiant_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
+            Acceuil_btn.setStyle("-fx-background-color: transparent");
         }
 
 
