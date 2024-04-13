@@ -35,26 +35,45 @@
 }
 
 .carte{
-    -fx-background-color:linear-gradient( to BOTTOM right, #A4D8FF, #A4D8FF);
-    -fx-border-color: #000;
-    -fx-border-width: .4px 0px .4px .4px;
+    -fx-background-color:linear-gradient( to BOTTOM right, #0F50A2, #A4D8FF);
+    -fx-background-radius: 10px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px 20px;
+    -fx-transition: background-color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.0);
 }
 #boutonajout{
-    -fx-background-color: #ac156e;
-    -fx-cursor: hand;
     -fx-text-fill : #FFF;
     -fx-font-size: 30px;
     -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(to bottom, #ac156e, #ac156e);
+    -fx-background-radius: 10px; /* Rounded corners for a softer look */
+    -fx-border-color: #891259; /* Slightly darker border for definition */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px 20px; /* Generous padding for comfort */
+    -fx-cursor: hand; /* Standard hand cursor on hover */
+    -fx-transition: background-color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    -fx-hover-base: #891259;
+    -fx-text-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 1, 1, 1, 1);
 }
 #titre{
     -fx-text-fill : #FFF;
 }
 #boutonajout1{
-    -fx-background-color: #ac156e;
-    -fx-cursor: hand;
     -fx-text-fill : #FFF;
     -fx-font-size: 30px;
     -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(to bottom, #ac156e, #ac156e);
+    -fx-background-radius: 10px; /* Rounded corners for a softer look */
+    -fx-border-color: #891259; /* Slightly darker border for definition */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px 20px; /* Generous padding for comfort */
+    -fx-cursor: hand; /* Standard hand cursor on hover */
+    -fx-transition: background-color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    -fx-hover-base: #891259;
+    -fx-text-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 1, 1, 1, 1);
 }
 #ajoutetudiant1{
     -fx-text-fill : #ac156e;
@@ -62,4 +81,42 @@
 
 #plus{
     -fx-font-size: 150px;
+}
+
+#jurycreation{
+    -fx-text-fill : #ac156e;
+}
+
+#boutonjury{
+    -fx-text-fill : #FFF;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(to bottom, #ac156e, #ac156e);
+    -fx-background-radius: 10px; /* Rounded corners for a softer look */
+    -fx-border-color: #891259; /* Slightly darker border for definition */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px 20px; /* Generous padding for comfort */
+    -fx-cursor: hand; /* Standard hand cursor on hover */
+    -fx-transition: background-color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    -fx-hover-base: #891259;
+    -fx-text-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 1, 1, 1, 1);
+}
+#boutonplanification{
+    -fx-text-fill : #FFF;
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(to bottom, #ac156e, #ac156e);
+    -fx-background-radius: 10px; /* Rounded corners for a softer look */
+    -fx-border-color: #891259; /* Slightly darker border for definition */
+    -fx-border-width: 2px;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px 20px; /* Generous padding for comfort */
+    -fx-cursor: hand; /* Standard hand cursor on hover */
+    -fx-transition: background-color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    -fx-hover-base: #891259;
+    -fx-text-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 1, 1, 1, 1);
+}
+#planification{
+    -fx-text-fill : #ac156e;
 }

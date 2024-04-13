@@ -21,3 +21,4 @@ public class page1Application extends Application {
         launch(args);
     }
 }
+
