@@ -7,17 +7,18 @@ public class Jury {
     private String rapporteur;
     private String examinateur;
     private String enseignant;
-    private String encadrant_societe;
-    private String id_jury;
-    public Jury(String president, String rapporteur, String examinateur, String enseignant) {
+    private String invite ;
+    private String filiere;
+    private String titre_pfe;
+
+    public Jury(String president, String rapporteur, String examinateur, String enseignant, String invite, String filiere, String titre_pfe) {
         this.president = president;
         this.rapporteur = rapporteur;
         this.examinateur = examinateur;
         this.enseignant = enseignant;
-        Random r = new Random( System.currentTimeMillis() );
-        int gen= ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000));
-        this.id_jury = "Jury no"+ gen;
-
+        this.invite = invite;
+        this.filiere = filiere;
+        this.titre_pfe = titre_pfe;
     }
 
     public String getPresident() {
@@ -28,28 +29,12 @@ public class Jury {
         this.president = president;
     }
 
-    public String getId_jury() {
-        return id_jury;
+    public String getRapporteur() {
+        return rapporteur;
     }
 
-    public void setId_jury(String id_jury) {
-        this.id_jury = id_jury;
-    }
-
-    public String getEncadrant_societe() {
-        return encadrant_societe;
-    }
-
-    public void setEncadrant_societe(String encadrant_societe) {
-        this.encadrant_societe = encadrant_societe;
-    }
-
-    public String getEnseignant() {
-        return enseignant;
-    }
-
-    public void setEnseignant(String enseignant) {
-        this.enseignant = enseignant;
+    public void setRapporteur(String rapporteur) {
+        this.rapporteur = rapporteur;
     }
 
     public String getExaminateur() {
@@ -60,21 +45,35 @@ public class Jury {
         this.examinateur = examinateur;
     }
 
-    public String getRapporteur() {
-        return rapporteur;
+    public String getEnseignant() {
+        return enseignant;
     }
 
-    public void setRapporteur(String rapporteur) {
-        this.rapporteur = rapporteur;
+    public void setEnseignant(String enseignant) {
+        this.enseignant = enseignant;
     }
 
-}
-class JuryData {
-    public static void main(String[] args) {
-        for (int i = 0; i < 20; i++) {
-            Random r = new Random( System.currentTimeMillis() );
-            double gen= ((1 + r.nextInt(2)) * 10000 + r.nextInt(10000)) + Math.random()*10000; ;
-            System.out.println((int) gen);
-        }
+    public String getInvite() {
+        return invite;
+    }
+
+    public void setInvite(String invite) {
+        this.invite = invite;
+    }
+
+    public String getFiliere() {
+        return filiere;
+    }
+
+    public void setFiliere(String filiere) {
+        this.filiere = filiere;
+    }
+
+    public String getTitre_pfe() {
+        return titre_pfe;
+    }
+
+    public void setTitre_pfe(String titre_pfe) {
+        this.titre_pfe = titre_pfe;
     }
 }

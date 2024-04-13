@@ -1,10 +1,10 @@
 package com.example.projetjava.DataClasses;
 
-public class Groupe {
+public class Filiere {
     private String diplome;
     private String specialite;
     private String id_groupe;
-    public Groupe(String diplome, String specialite) {
+    public Filiere(String diplome, String specialite) {
         this.diplome = diplome;
         this.specialite = specialite;
         this.id_groupe = diplome +" : "+specialite;
