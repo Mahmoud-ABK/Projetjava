@@ -4,19 +4,15 @@ public class Groupe {
     private String diplome;
     private String specialite;
     private String id_groupe;
-    public Groupe(String diplome, String specialte) {
+    public Groupe(String diplome, String specialite) {
         this.diplome = diplome;
         this.specialite = specialite;
-        this.id_groupe = diplome +" : "+specialte;
+        this.id_groupe = diplome +" : "+specialite;
 
     }
 
     public String getId_groupe() {
         return id_groupe;
-    }
-
-    public void setId_groupe(String id_groupe) {
-        this.id_groupe = id_groupe;
     }
 
     public String getDiplome() {
@@ -25,6 +21,7 @@ public class Groupe {
 
     public void setDiplome(String diplome) {
         this.diplome = diplome;
+        this.id_groupe = diplome +" : "+specialite;
     }
 
     public String getSpecialite() {
@@ -33,6 +30,7 @@ public class Groupe {
 
     public void setSpecialite(String specialite) {
         this.specialite = specialite;
+        this.id_groupe = diplome +" : "+specialite;
     }
 }
 

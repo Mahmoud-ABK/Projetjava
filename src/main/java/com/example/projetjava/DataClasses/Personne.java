@@ -1,6 +1,7 @@
 package com.example.projetjava.DataClasses;
 
 public class Personne {
+    //y compris President , examinateur,rapporteur, encadrant societe
     private String cin;
     private String nom;
     private String prenom;
