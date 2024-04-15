@@ -5,10 +5,10 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class database {
-    public Connection connectDb(){
+    public static Connection connectDb(){
         try{
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/Projet_Java", "root", "");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/projet_java", "root", "");
             return connect;
         }catch(Exception e){
             e.printStackTrace();
