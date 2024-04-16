@@ -4,8 +4,8 @@ public class Etudiant  {
     private String filiere;
     private String email;
     private String cin;
-    String nom;
-    String prenom;
+    private String nom;
+    private String prenom;
     public Etudiant(String cin, String nom, String prenom,String email,String filiere) {
         this.cin = cin;
         this.nom = nom;
@@ -18,6 +18,15 @@ public class Etudiant  {
         this.filiere = filiere;
 
     }*/
+    public String getCin(){
+        return cin;
+    }
+    public String getNom(){
+        return nom;
+    }
+    public String getPrenom(){
+        return prenom;
+    }
     public String getFiliere() {return filiere;}
     public void setFiliere(String filiere) {this.filiere = filiere;}
     public String getEmail() {return email;}

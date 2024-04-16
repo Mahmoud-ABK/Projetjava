@@ -242,6 +242,9 @@ public class page2Controller {
 
 
     }
+    public void initialize() {
+        displayEtudiants();
+    }
 
 }
 
