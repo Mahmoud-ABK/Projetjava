@@ -42,9 +42,10 @@
     -fx-padding: 10px 20px;
     -fx-transition: background-color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.0);
 }
-#boutonajout{
+
+#supprimer_etudiant, #supprimer_enseignant, #supprimer_pfe, #supprimer_jury, #supprimer_soutenance{
     -fx-text-fill : #FFF;
-    -fx-font-size: 30px;
+    -fx-font-size: 28px;
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(to bottom, #ac156e, #ac156e);
     -fx-background-radius: 10px; /* Rounded corners for a softer look */
@@ -60,7 +61,7 @@
 #titre{
     -fx-text-fill : #FFF;
 }
-#boutonajout1{
+#ajouter_etudiant, #modifier_etudiant, #ajouter_enseignant, #modifier_enseignant, #ajouter_pfe, #modifier_pfe, #ajouter_jury, #modifier_jury, #ajouter_soutenance, #modifier_soutenance{
     -fx-text-fill : #FFF;
     -fx-font-size: 30px;
     -fx-font-weight: bold;

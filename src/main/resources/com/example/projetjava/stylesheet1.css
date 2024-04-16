@@ -13,7 +13,7 @@
     -fx-text-fill: #FFFFFF; /* White text for contrast */
     -fx-padding: 10px 20px; /* Generous padding for comfort */
     -fx-cursor: hand; /* Standard hand cursor on hover */
-    -fx-transition: background-color 0.4s cubic-bezier(0.25, 0.1, 0.25, 1.0);
+    -fx-transition: background-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1.0);
     -fx-hover-base: #3579BD;
 
     -fx-text-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 1, 1, 1, 1);
