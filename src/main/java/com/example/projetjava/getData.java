@@ -11,10 +11,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class getData {
-    private Connection connection;
-    private PreparedStatement preparedStatement;
-    private ResultSet resultSet;
-public ObservableList<Etudiant> getEtudiants() {
+    static private Connection connection;
+    static private PreparedStatement preparedStatement;
+    static private ResultSet resultSet;
+public static ObservableList<Etudiant> getEtudiants() {
     ObservableList<Etudiant> listEtudiant = FXCollections.observableArrayList();
     String sql = "SELECT * FROM etudiant";
     connection =database.connectDb();

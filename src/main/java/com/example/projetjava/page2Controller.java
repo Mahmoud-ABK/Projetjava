@@ -1,11 +1,17 @@
 package com.example.projetjava;
 
+import com.example.projetjava.DataClasses.Etudiant;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.chart.BarChart;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.event.ActionEvent;
+
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class page2Controller {
 
@@ -22,10 +28,46 @@ public class page2Controller {
     private AnchorPane Enseignant_form;
 
     @FXML
+    private TextField Etudiant_Email;
+
+    @FXML
+    private TextField Etudiant_ID;
+
+    @FXML
     private Button Etudiant_btn;
+    @FXML
+    private TableView<Etudiant> Etudiant_Table_View;
+
+
+    @FXML
+    private TableColumn<Etudiant, String> Etudiant_col_ID;
+
+    @FXML
+    private TableColumn<Etudiant, String> Etudiant_col_email;
+
+    @FXML
+    private TableColumn<Etudiant, String> Etudiant_col_filiere;
+
+    @FXML
+    private TableColumn<Etudiant, String> Etudiant_col_nom;
+
+    @FXML
+    private TableColumn<Etudiant, String> Etudiant_col_prenom;
+
+    @FXML
+    private ComboBox<?> Etudiant_filiere;
 
     @FXML
     private AnchorPane Etudiant_form;
+
+    @FXML
+    private TextField Etudiant_nom;
+
+    @FXML
+    private TextField Etudiant_prenom;
+
+    @FXML
+    private TextField Etudiant_recherche;
 
     @FXML
     private Button Jury_btn;
@@ -81,6 +123,35 @@ public class page2Controller {
     @FXML
     private Label planification;
 
+    @FXML
+    private BarChart<?, ?> soutenu_chart;
+
+    @FXML
+    private Label total_affecte;
+
+    @FXML
+    private Label total_etudiants;
+
+    @FXML
+    private Label total_nonaffecte;
+// page Etudiants
+    private ObservableList<Etudiant> Etudiants;
+    public void displayEtudiants(){
+        Etudiants=getData.getEtudiants();
+        try{
+        Etudiant_col_ID.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("cin"));
+        Etudiant_col_nom.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("nom"));
+        Etudiant_col_prenom.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("prenom"));
+        Etudiant_col_email.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("email"));
+        Etudiant_col_filiere.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("filiere"));
+        Etudiant_Table_View.setItems(Etudiants);}
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+
+    }
     public void switchForm(ActionEvent event) {
         if(event.getSource() == Acceuil_btn) {
             //Transition
@@ -110,6 +181,7 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: transparent");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
+            displayEtudiants();
         }else if(event.getSource() == Enseignant_btn) {
             //Transition
             Acceuil_form.setVisible(false);
@@ -170,5 +242,6 @@ public class page2Controller {
 
 
     }
+
 }
 
