@@ -83,6 +83,7 @@ public class page2Controller {
 
     public void switchForm(ActionEvent event) {
         if(event.getSource() == Acceuil_btn) {
+            //Transition
             Acceuil_form.setVisible(true);
             Etudiant_form.setVisible(false);
             Enseignant_form.setVisible(false);
@@ -96,6 +97,7 @@ public class page2Controller {
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
         }else if(event.getSource() == Etudiant_btn) {
+            //Transition
             Acceuil_form.setVisible(false);
             Etudiant_form.setVisible(true);
             Enseignant_form.setVisible(false);
@@ -109,6 +111,7 @@ public class page2Controller {
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
         }else if(event.getSource() == Enseignant_btn) {
+            //Transition
             Acceuil_form.setVisible(false);
             Etudiant_form.setVisible(false);
             Enseignant_form.setVisible(true);
@@ -122,6 +125,7 @@ public class page2Controller {
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
         }else if(event.getSource() == Jury_btn) {
+            //Transition
             Acceuil_form.setVisible(false);
             Etudiant_form.setVisible(false);
             Enseignant_form.setVisible(false);
@@ -135,6 +139,7 @@ public class page2Controller {
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
         }else if(event.getSource() == Pfe_btn) {
+            //Transition
             Acceuil_form.setVisible(false);
             Etudiant_form.setVisible(false);
             Enseignant_form.setVisible(false);
@@ -148,6 +153,7 @@ public class page2Controller {
             Pfe_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
         }else if(event.getSource() == Soutenance_btn) {
+            //Transition
             Acceuil_form.setVisible(false);
             Etudiant_form.setVisible(false);
             Enseignant_form.setVisible(false);
