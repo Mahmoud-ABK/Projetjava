@@ -45,7 +45,7 @@
 
 #supprimer_etudiant, #supprimer_enseignant, #supprimer_pfe, #supprimer_jury, #supprimer_soutenance{
     -fx-text-fill : #FFF;
-    -fx-font-size: 28px;
+    -fx-font-size: 26px;
     -fx-font-weight: bold;
     -fx-background-color: linear-gradient(to bottom, #ac156e, #ac156e);
     -fx-background-radius: 10px; /* Rounded corners for a softer look */
