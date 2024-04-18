@@ -22,7 +22,19 @@ public class page2Controller {
     private AnchorPane Acceuil_form;
 
     @FXML
+    private TableView<?> Enseignant_Table_View;
+
+    @FXML
     private Button Enseignant_btn;
+
+    @FXML
+    private TableColumn<?, ?> Enseignant_col_ID;
+
+    @FXML
+    private TableColumn<?, ?> Enseignant_col_nom;
+
+    @FXML
+    private TableColumn<?, ?> Enseignant_col_prenom;
 
     @FXML
     private AnchorPane Enseignant_form;
@@ -34,10 +46,10 @@ public class page2Controller {
     private TextField Etudiant_ID;
 
     @FXML
-    private Button Etudiant_btn;
-    @FXML
     private TableView<Etudiant> Etudiant_Table_View;
 
+    @FXML
+    private Button Etudiant_btn;
 
     @FXML
     private TableColumn<Etudiant, String> Etudiant_col_ID;
@@ -73,7 +85,43 @@ public class page2Controller {
     private Button Jury_btn;
 
     @FXML
+    private TableColumn<?, ?> Jury_col_encadrant;
+
+    @FXML
+    private TableColumn<?, ?> Jury_col_examinateur;
+
+    @FXML
+    private TableColumn<?, ?> Jury_col_invite;
+
+    @FXML
+    private TableColumn<?, ?> Jury_col_president;
+
+    @FXML
+    private TableColumn<?, ?> Jury_col_rapporteur;
+
+    @FXML
+    private TableColumn<?, ?> Jury_col_titre;
+
+    @FXML
     private AnchorPane Jury_form;
+
+    @FXML
+    private TableView<?> Jury_table_view;
+
+    @FXML
+    private TableColumn<?, ?> PFE_col_encadrant;
+
+    @FXML
+    private TableColumn<?, ?> PFE_col_etudiant1;
+
+    @FXML
+    private TableColumn<?, ?> PFE_col_etudiant2;
+
+    @FXML
+    private TableColumn<?, ?> PFE_col_titre;
+
+    @FXML
+    private TableView<?> PFE_table_view;
 
     @FXML
     private Button Pfe_btn;
@@ -88,7 +136,28 @@ public class page2Controller {
     private Button Soutenance_btn;
 
     @FXML
+    private TableColumn<?, ?> Soutenance_col_date;
+
+    @FXML
+    private TableColumn<?, ?> Soutenance_col_heure;
+
+    @FXML
+    private TableColumn<?, ?> Soutenance_col_note;
+
+    @FXML
+    private TableColumn<?, ?> Soutenance_col_salle;
+
+    @FXML
+    private TableColumn<?, ?> Soutenance_col_titre;
+
+    @FXML
+    private TableColumn<?, ?> Soutenance_col_validite;
+
+    @FXML
     private AnchorPane Soutenance_form;
+
+    @FXML
+    private TableView<?> Soutenance_table_view;
 
     @FXML
     private AnchorPane TOP;
@@ -97,22 +166,25 @@ public class page2Controller {
     private Label WELCO;
 
     @FXML
+    private Button ajouter_enseignant;
+
+    @FXML
+    private Button ajouter_etudiant;
+
+    @FXML
+    private Button ajouter_pfe;
+
+    @FXML
+    private Button ajouter_soutenance;
+
+    @FXML
     private Label ajoutetudiant;
 
     @FXML
     private Label ajoutetudiant1;
 
     @FXML
-    private Button boutonajout;
-
-    @FXML
-    private Button boutonajout1;
-
-    @FXML
     private Button boutonjury;
-
-    @FXML
-    private Button boutonplanification;
 
     @FXML
     private Button close;
@@ -121,10 +193,40 @@ public class page2Controller {
     private Label jurycreation;
 
     @FXML
+    private Button modifier_enseignant;
+
+    @FXML
+    private Button modifier_etudiant;
+
+    @FXML
+    private Button modifier_jury;
+
+    @FXML
+    private Button modifier_pfe;
+
+    @FXML
+    private Button modifier_soutenance;
+
+    @FXML
     private Label planification;
 
     @FXML
     private BarChart<?, ?> soutenu_chart;
+
+    @FXML
+    private Button supprimer_enseignant;
+
+    @FXML
+    private Button supprimer_etudiant;
+
+    @FXML
+    private Button supprimer_jury;
+
+    @FXML
+    private Button supprimer_pfe;
+
+    @FXML
+    private Button supprimer_soutenance;
 
     @FXML
     private Label total_affecte;
