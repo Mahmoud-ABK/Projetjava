@@ -1,6 +1,8 @@
 package com.example.projetjava;
 
+import com.example.projetjava.DataClasses.Enseignant;
 import com.example.projetjava.DataClasses.Etudiant;
+import com.example.projetjava.DataClasses.PFE;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -22,19 +24,25 @@ public class page2Controller {
     private AnchorPane Acceuil_form;
 
     @FXML
-    private TableView<?> Enseignant_Table_View;
+    private TableView<Enseignant> Enseignant_Table_View;
 
     @FXML
     private Button Enseignant_btn;
 
     @FXML
-    private TableColumn<?, ?> Enseignant_col_ID;
+    private TableColumn<Enseignant, String> Enseignant_col_ID;
 
     @FXML
-    private TableColumn<?, ?> Enseignant_col_nom;
+    private TableColumn<Enseignant, String> Enseignant_col_nom;
 
     @FXML
-    private TableColumn<?, ?> Enseignant_col_prenom;
+    private TableColumn<Enseignant, String> Enseignant_col_prenom;
+
+    @FXML
+    private TableColumn<Enseignant, String> Enseignant_col_email;
+
+    @FXML
+    private TableColumn<Enseignant, String> Enseignant_col_position;
 
     @FXML
     private AnchorPane Enseignant_form;
@@ -109,19 +117,19 @@ public class page2Controller {
     private TableView<?> Jury_table_view;
 
     @FXML
-    private TableColumn<?, ?> PFE_col_encadrant;
+    private TableColumn<PFE, String> PFE_col_encadrant;
 
     @FXML
-    private TableColumn<?, ?> PFE_col_etudiant1;
+    private TableColumn<PFE, String> PFE_col_etudiant1;
 
     @FXML
-    private TableColumn<?, ?> PFE_col_etudiant2;
+    private TableColumn<PFE, String> PFE_col_etudiant2;
 
     @FXML
-    private TableColumn<?, ?> PFE_col_titre;
+    private TableColumn<PFE, String> PFE_col_titre;
 
     @FXML
-    private TableView<?> PFE_table_view;
+    private TableView<PFE> PFE_table_view;
 
     @FXML
     private Button Pfe_btn;
@@ -250,9 +258,35 @@ public class page2Controller {
         catch(Exception e){
             e.printStackTrace();
         }
+    }
 
+    private ObservableList<Enseignant> Enseignants;
+    public void displayEnseignant() {
+        Enseignants = getData.getEnseignant();
+        try {
+            Enseignant_col_ID.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("cin"));
+            Enseignant_col_nom.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("nom"));
+            Enseignant_col_prenom.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("prenom"));
+            Enseignant_col_email.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("Email"));
+            Enseignant_col_position.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("Position"));
+            Enseignant_Table_View.setItems(Enseignants);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-
+    private ObservableList<PFE> PFES;
+    public void displayPFES() {
+        PFES = getData.getPFE();
+        try {
+            PFE_col_titre.setCellValueFactory(new PropertyValueFactory<PFE, String>("titre_pfe"));
+            PFE_col_encadrant.setCellValueFactory(new PropertyValueFactory<PFE, String>("enseignant"));
+            PFE_col_etudiant1.setCellValueFactory(new PropertyValueFactory<PFE, String>("etudiant1"));
+            PFE_col_etudiant2.setCellValueFactory(new PropertyValueFactory<PFE, String>("etudiant2"));
+            PFE_table_view.setItems(PFES);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public void switchForm(ActionEvent event) {
         if(event.getSource() == Acceuil_btn) {
@@ -298,6 +332,7 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: transparent");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
+            displayEnseignant();
         }else if(event.getSource() == Jury_btn) {
             //Transition
             Acceuil_form.setVisible(false);
@@ -326,6 +361,7 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: transparent");
             Pfe_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
+            displayPFES();
         }else if(event.getSource() == Soutenance_btn) {
             //Transition
             Acceuil_form.setVisible(false);
