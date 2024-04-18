@@ -1,6 +1,7 @@
 package com.example.projetjava;
 
 import com.example.projetjava.DataClasses.Etudiant;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -67,7 +68,7 @@ public class page2Controller {
     private TableColumn<Etudiant, String> Etudiant_col_prenom;
 
     @FXML
-    private ComboBox<?> Etudiant_filiere;
+    private ComboBox<String> Etudiant_filiere;
 
     @FXML
     private AnchorPane Etudiant_form;
@@ -238,6 +239,10 @@ public class page2Controller {
     private Label total_nonaffecte;
 // page Etudiants
     private ObservableList<Etudiant> Etudiants;
+    public void fillComboBoxFiliere(){
+        String[] filiere={"Master Pro:Genie Logiciel","Master Recherche:Genie Logiciel","License: sciences informatiqes","Cycle Ingenieur:Genie Logiciel"};
+        Etudiant_filiere.setItems(FXCollections.observableArrayList(filiere));
+    }
     public void displayEtudiants(){
         Etudiants=getData.getEtudiants();
         try{
@@ -253,6 +258,30 @@ public class page2Controller {
 
 
 
+    }
+    public void AjouterEtudiant(){
+        String id=Etudiant_ID.getText();
+        String nom=Etudiant_nom.getText();
+        String prenom=Etudiant_prenom.getText();
+        String email=Etudiant_Email.getText();
+        String filiere=(String)Etudiant_filiere.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(id.isEmpty()||nom.isEmpty()||prenom.isEmpty()||email.isEmpty()|| filiere.isEmpty()){
+
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Valeur nulle");
+            alert.setContentText("Veuillez remplir les champs");
+            alert.showAndWait();
+        }else if (id.length()!=8){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Cin Invalide ");
+            alert.setContentText("Cin doit etre egale a 8 chiffres ");
+            alert.showAndWait();
+        }
+        else{
+        Etudiant etudiant=new Etudiant(Etudiant_ID.getText(),Etudiant_nom.getText(),Etudiant_prenom.getText(),Etudiant_Email.getText(),(String)Etudiant_filiere.getSelectionModel().getSelectedItem());
+        setData.addEtudiant(etudiant);
+        displayEtudiants();}
     }
     public void switchForm(ActionEvent event) {
         if(event.getSource() == Acceuil_btn) {
@@ -283,6 +312,8 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: transparent");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
+            setData.addEtudiant(new Etudiant("04578962","moshen","moshn","moshn@moshn.moshen","Master Pro:Genie Logiciel"));
+            fillComboBoxFiliere();
             displayEtudiants();
         }else if(event.getSource() == Enseignant_btn) {
             //Transition
