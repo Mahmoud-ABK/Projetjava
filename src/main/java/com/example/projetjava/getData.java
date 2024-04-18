@@ -34,6 +34,6 @@ public static ObservableList<Etudiant> getEtudiants() {
     }catch (Exception e){e.printStackTrace();}
 
 
-    return listEtudiant;
-}
+        return listEtudiant;
+    }
 }
