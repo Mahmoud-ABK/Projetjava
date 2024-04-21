@@ -245,6 +245,7 @@ public class page2Controller {
 
     @FXML
     private Label total_nonaffecte;
+    private ObservableList<PFE> PFES;
 // page Etudiants
     private ObservableList<Etudiant> Etudiants;
     public void fillComboBoxFiliere(){
@@ -281,7 +282,7 @@ public class page2Controller {
     }
 
 
-    }
+
     public void AjouterEtudiant(){
         String id=Etudiant_ID.getText();
         String nom=Etudiant_nom.getText();
@@ -305,7 +306,8 @@ public class page2Controller {
         Etudiant etudiant=new Etudiant(Etudiant_ID.getText(),Etudiant_nom.getText(),Etudiant_prenom.getText(),Etudiant_Email.getText(),(String)Etudiant_filiere.getSelectionModel().getSelectedItem());
         setData.addEtudiant(etudiant);
         displayEtudiants();}
-    private ObservableList<PFE> PFES;
+    }
+
     public void displayPFES() {
         PFES = getData.getPFE();
         try {
