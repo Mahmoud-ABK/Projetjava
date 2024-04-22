@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.event.ActionEvent;
@@ -246,6 +247,8 @@ public class page2Controller {
     @FXML
     private Label total_nonaffecte;
     private ObservableList<PFE> PFES;
+    @FXML
+    private ImageView searchEtudiant;
 // page Etudiants
     private ObservableList<Etudiant> Etudiants;
     public void fillComboBoxFiliere(){
@@ -290,22 +293,80 @@ public class page2Controller {
         String email=Etudiant_Email.getText();
         String filiere=(String)Etudiant_filiere.getSelectionModel().getSelectedItem();
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        if(id.isEmpty()||nom.isEmpty()||prenom.isEmpty()||email.isEmpty()|| filiere.isEmpty()){
+        if(id.isEmpty()||nom.isEmpty()||prenom.isEmpty()||email.isEmpty()|| Etudiant_filiere.getSelectionModel().isEmpty()){
 
             alert.setTitle("Erreur");
-            alert.setHeaderText("Valeur nulle");
-            alert.setContentText("Veuillez remplir les champs");
+            alert.setHeaderText("Veuillez remplir les champs");
+
             alert.showAndWait();
         }else if (id.length()!=8){
             alert.setTitle("Erreur");
             alert.setHeaderText("Cin Invalide ");
             alert.setContentText("Cin doit etre egale a 8 chiffres ");
             alert.showAndWait();
-        }
-        else{
+        } else if (getData.existeDansEtudiants(id)) {
+
+            alert.setTitle("Erreur");
+            alert.setHeaderText("cette CIN deja existe");
+            alert.showAndWait();
+
+        } else{
         Etudiant etudiant=new Etudiant(Etudiant_ID.getText(),Etudiant_nom.getText(),Etudiant_prenom.getText(),Etudiant_Email.getText(),(String)Etudiant_filiere.getSelectionModel().getSelectedItem());
         setData.addEtudiant(etudiant);
-        displayEtudiants();}
+        displayEtudiants();
+        alert.setAlertType(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Ajout Etudiant");
+        alert.setHeaderText("Ajout Etudiant effectué avec succée");
+        }
+
+    }
+    public void ModifierEtudiant(){
+        String id=Etudiant_ID.getText();
+        String nom=Etudiant_nom.getText();
+        String prenom=Etudiant_prenom.getText();
+        String email=Etudiant_Email.getText();
+        String filiere=(String)Etudiant_filiere.getSelectionModel().getSelectedItem();
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(id.isEmpty() || nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || Etudiant_filiere.getSelectionModel().isEmpty()){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir les champs");
+            alert.showAndWait();
+        }else {
+            updateData.updateEtudiants(new Etudiant(id,nom,prenom,email,filiere));
+            displayEtudiants();
+        }
+
+    }
+    public void SupprimerEtudiant(){
+        String id=Etudiant_ID.getText();
+        if(id.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir le champ de Cin");
+            alert.showAndWait();
+        }else{
+            deleteData.deleteEtudiant(id);
+            displayEtudiants();
+        }
+    }
+    public void rechercheEtudiant(){
+            String data=Etudiant_recherche.getText();
+            if(data.isEmpty()){
+                displayEtudiants();
+            }else {
+                try{
+                    Etudiant_col_ID.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("cin"));
+                    Etudiant_col_nom.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("nom"));
+                    Etudiant_col_prenom.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("prenom"));
+                    Etudiant_col_email.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("email"));
+                    Etudiant_col_filiere.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("filiere"));
+                    Etudiant_Table_View.setItems(queryData.getQueryEtudiants(data));}
+                catch(Exception e){
+                    e.printStackTrace();
+                }
+
+            }
     }
 
     public void displayPFES() {
@@ -349,7 +410,6 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: transparent");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
-            setData.addEtudiant(new Etudiant("04578962","moshen","moshn","moshn@moshn.moshen","Master Pro:Genie Logiciel"));
             fillComboBoxFiliere();
             displayEtudiants();
         }else if(event.getSource() == Enseignant_btn) {

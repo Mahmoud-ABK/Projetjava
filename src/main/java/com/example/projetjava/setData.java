@@ -5,10 +5,9 @@ import com.example.projetjava.DataClasses.Etudiant;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class setData {
     static private Connection connection;
@@ -26,7 +25,14 @@ public class setData {
             preparedStatement.setString(5, etudiant.getFiliere());
             preparedStatement.executeUpdate();
 
-        }catch (Exception e){
+        }catch(SQLIntegrityConstraintViolationException e){
+           /* Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("cette CIN deja existe");
+            alert.showAndWait();
+*/
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
 

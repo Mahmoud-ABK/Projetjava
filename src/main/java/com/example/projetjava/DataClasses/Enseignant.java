@@ -3,7 +3,7 @@ package com.example.projetjava.DataClasses;
 public class Enseignant extends Personne{
     private String position;
     private String email;
-    public Enseignant(String cin, String nom, String prenom, String email, String position) {
+    public Enseignant(String cin, String nom, String prenom, String position, String email) {
         super( cin,nom, prenom);
         this.email = email;
         this.position = position;
