@@ -1,6 +1,7 @@
 package com.example.projetjava;
 
 
+import com.example.projetjava.DataClasses.Enseignant;
 import com.example.projetjava.DataClasses.Etudiant;
 
 import javafx.collections.FXCollections;
@@ -33,6 +34,25 @@ public class setData {
 */
         }
         catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public static void addEnseignant(Enseignant enseignant){
+        String sql = "insert into enseignant values(?,?,?,?,?)";
+        connection=database.connectDb();
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setString(1,enseignant.getCin());
+            preparedStatement.setString(2,enseignant.getNom());
+            preparedStatement.setString(3,enseignant.getPrenom());
+            preparedStatement.setString(4,enseignant.getEmail());
+            preparedStatement.setString(5, enseignant.getPosition());
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e){
             e.printStackTrace();
         }
 

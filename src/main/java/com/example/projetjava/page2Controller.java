@@ -2,6 +2,7 @@ package com.example.projetjava;
 
 import com.example.projetjava.DataClasses.Enseignant;
 import com.example.projetjava.DataClasses.Etudiant;
+import com.example.projetjava.DataClasses.Jury;
 import javafx.collections.FXCollections;
 import com.example.projetjava.DataClasses.PFE;
 import javafx.collections.ObservableList;
@@ -45,6 +46,21 @@ public class page2Controller {
 
     @FXML
     private TableColumn<Enseignant, String> Enseignant_col_position;
+
+    @FXML
+    private TextField Enseignant_ID;
+
+    @FXML
+    private TextField Enseignant_nom;
+
+    @FXML
+    private TextField Enseignant_prenom;
+
+    @FXML
+    private TextField Enseignant_email;
+
+    @FXML
+    private ComboBox<String> Enseignant_position;
 
     @FXML
     private AnchorPane Enseignant_form;
@@ -95,28 +111,28 @@ public class page2Controller {
     private Button Jury_btn;
 
     @FXML
-    private TableColumn<?, ?> Jury_col_encadrant;
+    private TableColumn<Jury, String> Jury_col_encadrant;
 
     @FXML
-    private TableColumn<?, ?> Jury_col_examinateur;
+    private TableColumn<Jury, String> Jury_col_examinateur;
 
     @FXML
-    private TableColumn<?, ?> Jury_col_invite;
+    private TableColumn<Jury, String> Jury_col_invite;
 
     @FXML
-    private TableColumn<?, ?> Jury_col_president;
+    private TableColumn<Jury, String> Jury_col_president;
 
     @FXML
-    private TableColumn<?, ?> Jury_col_rapporteur;
+    private TableColumn<Jury, String> Jury_col_rapporteur;
 
     @FXML
-    private TableColumn<?, ?> Jury_col_titre;
+    private TableColumn<Jury, String> Jury_col_titre;
 
     @FXML
     private AnchorPane Jury_form;
 
     @FXML
-    private TableView<?> Jury_table_view;
+    private TableView<Jury> Jury_table_view;
 
     @FXML
     private TableColumn<PFE, String> PFE_col_encadrant;
@@ -249,8 +265,11 @@ public class page2Controller {
     private ObservableList<PFE> PFES;
     @FXML
     private ImageView searchEtudiant;
-// page Etudiants
+
+    // PAGE ETUDIANT
+
     private ObservableList<Etudiant> Etudiants;
+
     public void fillComboBoxFiliere(){
         String[] filiere={"Master Pro:Genie Logiciel","Master Recherche:Genie Logiciel","License: sciences informatiqes","Cycle Ingenieur:Genie Logiciel"};
         Etudiant_filiere.setItems(FXCollections.observableArrayList(filiere));
@@ -268,23 +287,6 @@ public class page2Controller {
             e.printStackTrace();
         }
     }
-
-    private ObservableList<Enseignant> Enseignants;
-    public void displayEnseignant() {
-        Enseignants = getData.getEnseignant();
-        try {
-            Enseignant_col_ID.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("cin"));
-            Enseignant_col_nom.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("nom"));
-            Enseignant_col_prenom.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("prenom"));
-            Enseignant_col_email.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("Email"));
-            Enseignant_col_position.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("Position"));
-            Enseignant_Table_View.setItems(Enseignants);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
 
     public void AjouterEtudiant(){
         String id=Etudiant_ID.getText();
@@ -307,7 +309,7 @@ public class page2Controller {
         } else if (getData.existeDansEtudiants(id)) {
 
             alert.setTitle("Erreur");
-            alert.setHeaderText("cette CIN deja existe");
+            alert.setHeaderText("ce CIN deja existe");
             alert.showAndWait();
 
         } else{
@@ -369,6 +371,63 @@ public class page2Controller {
             }
     }
 
+    //PAGE ENSEIGNANT
+
+    private ObservableList<Enseignant> Enseignants;
+    public void displayEnseignant() {
+        Enseignants = getData.getEnseignant();
+        try {
+            Enseignant_col_ID.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("cin"));
+            Enseignant_col_nom.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("nom"));
+            Enseignant_col_prenom.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("prenom"));
+            Enseignant_col_email.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("Email"));
+            Enseignant_col_position.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("Position"));
+            Enseignant_Table_View.setItems(Enseignants);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void fillComboBoxPosition(){
+        String[] position={"Assistant","Maitre assistant","Maître de conférences","Professeur de l'enseignement supérieur"};
+        Enseignant_position.setItems(FXCollections.observableArrayList(position));
+    }
+
+    public void AjouterEnseignant(){
+        String id=Enseignant_ID.getText();
+        String nom=Enseignant_nom.getText();
+        String prenom=Enseignant_prenom.getText();
+        String email=Enseignant_email.getText();
+        String position=(String)Enseignant_position.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(id.isEmpty()||nom.isEmpty()||prenom.isEmpty()||email.isEmpty()|| Enseignant_position.getSelectionModel().isEmpty()){
+
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir les champs");
+
+            alert.showAndWait();
+        }else if (id.length()!=8){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Cin Invalide ");
+            alert.setContentText("Cin doit etre egale a 8 chiffres ");
+            alert.showAndWait();
+        } else if (getData.existeEnseignant(id)) {
+
+            alert.setTitle("Erreur");
+            alert.setHeaderText("ce CIN deja existe");
+            alert.showAndWait();
+
+        } else{
+            Enseignant enseignant=new Enseignant(Enseignant_ID.getText(),Enseignant_nom.getText(),Enseignant_prenom.getText(),Enseignant_email.getText(),(String)Enseignant_position.getSelectionModel().getSelectedItem());
+            setData.addEnseignant(enseignant);
+            displayJurys();
+            alert.setAlertType(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Ajout Enseignant");
+            alert.setHeaderText("Ajout Enseignant effectué avec succée");
+        }
+
+    }
+
     public void displayPFES() {
         PFES = getData.getPFE();
         try {
@@ -381,6 +440,23 @@ public class page2Controller {
             e.printStackTrace();
         }
     }
+
+    private ObservableList<Jury> Jurys;
+    public void displayJurys() {
+        Jurys = getData.getJury();
+        try {
+            Jury_col_titre.setCellValueFactory(new PropertyValueFactory<Jury, String>("titre_pfe"));
+            Jury_col_president.setCellValueFactory(new PropertyValueFactory<Jury, String>("president"));
+            Jury_col_rapporteur.setCellValueFactory(new PropertyValueFactory<Jury, String>("rapporteur"));
+            Jury_col_examinateur.setCellValueFactory(new PropertyValueFactory<Jury, String>("examinateur"));
+            Jury_col_encadrant.setCellValueFactory(new PropertyValueFactory<Jury, String>("enseignant"));
+            Jury_col_invite.setCellValueFactory(new PropertyValueFactory<Jury, String>("invite"));
+            Jury_table_view.setItems(Jurys);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void switchForm(ActionEvent event) {
         if(event.getSource() == Acceuil_btn) {
             //Transition
@@ -426,6 +502,7 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: transparent");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
+            fillComboBoxPosition();
             displayEnseignant();
         }else if(event.getSource() == Jury_btn) {
             //Transition
@@ -441,6 +518,7 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
+            displayJurys();
         }else if(event.getSource() == Pfe_btn) {
             //Transition
             Acceuil_form.setVisible(false);
