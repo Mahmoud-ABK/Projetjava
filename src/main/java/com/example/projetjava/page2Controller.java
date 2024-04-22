@@ -246,6 +246,31 @@ public class page2Controller {
 
     @FXML
     private Label total_nonaffecte;
+    @FXML
+    private DatePicker Soutenance_Date;
+
+    @FXML
+    private DatePicker Soutenance_Heure;
+
+    @FXML
+    private TextField Soutenance_Note;
+
+    @FXML
+    private TextField Soutenance_Salle;
+
+
+    @FXML
+    private ComboBox<String> Soutenance_filiere;
+
+
+    @FXML
+    private TextField Soutenance_recherche;
+
+
+    @FXML
+    private ComboBox<String> Soutenance_titrePFE;
+
+
     private ObservableList<PFE> PFES;
     @FXML
     private ImageView searchEtudiant;
@@ -359,9 +384,17 @@ public class page2Controller {
             alert.setHeaderText("Veuillez remplir le champ de Cin");
             alert.showAndWait();
         }else{
-            deleteData.deleteEtudiant(id);
-            displayEtudiants();
-            ResetPageEtudiant();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Vous êtes sur de supprimer cet etudiant");
+            alert.showAndWait().ifPresent(response->{
+                if (response == ButtonType.OK){
+                    deleteData.deleteEtudiant(id);
+                    displayEtudiants();
+                    ResetPageEtudiant();
+                }
+            });
+
 
         }
     }
