@@ -1,7 +1,7 @@
 package com.example.projetjava;
 
-import com.example.projetjava.DataClasses.Enseignant;
-import com.example.projetjava.DataClasses.Etudiant;
+import com.example.projetjava.DataClasses.*;
+
 import javafx.collections.FXCollections;
 import com.example.projetjava.DataClasses.PFE;
 import javafx.collections.ObservableList;
@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class page2Controller {
@@ -429,6 +431,16 @@ public class page2Controller {
             e.printStackTrace();
         }
     }
+    //page soutenance
+    public void prepareSoutenance(){
+        String titre_pfe=(String) Soutenance_titrePFE.getSelectionModel().getSelectedItem();
+        LocalDate dateSoutenance = Soutenance_Date.getValue();
+        LocalTime heureSoutenance =LocalTime.from( Soutenance_Heure.getValue());
+        System.out.println(heureSoutenance);
+
+
+    }
+
     public void switchForm(ActionEvent event) {
         if(event.getSource() == Acceuil_btn) {
             //Transition

@@ -736,7 +736,7 @@
                                           <Font name="Tahoma Bold" size="26.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="ajouter_soutenance" layoutX="840.0" layoutY="16.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Ajouter">
+                                    <Button fx:id="ajouter_soutenance" layoutX="840.0" layoutY="16.0" mnemonicParsing="false" onAction="#prepareSoutenance" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Ajouter">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
