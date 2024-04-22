@@ -29,7 +29,7 @@ public class updateData {
                 preparedStatement.setString(4, etudiant.getFiliere());
                 preparedStatement.setString(5, etudiant.getCin());
                 preparedStatement.executeUpdate();
-
+                alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setTitle("modification");
                 alert.setHeaderText("modification effectué avec succée");
                 alert.showAndWait();

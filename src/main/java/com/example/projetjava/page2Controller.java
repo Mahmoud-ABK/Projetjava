@@ -255,6 +255,14 @@ public class page2Controller {
         String[] filiere={"Master Pro:Genie Logiciel","Master Recherche:Genie Logiciel","License: sciences informatiqes","Cycle Ingenieur:Genie Logiciel"};
         Etudiant_filiere.setItems(FXCollections.observableArrayList(filiere));
     }
+    public void ResetPageEtudiant(){
+        Etudiant_ID.setText("");
+        Etudiant_nom.setText("");
+        Etudiant_prenom.setText("");
+        Etudiant_Email.setText("");
+        Etudiant_filiere.setItems(FXCollections.observableArrayList());
+
+    }
     public void displayEtudiants(){
         Etudiants=getData.getEtudiants();
         try{
@@ -314,9 +322,11 @@ public class page2Controller {
         Etudiant etudiant=new Etudiant(Etudiant_ID.getText(),Etudiant_nom.getText(),Etudiant_prenom.getText(),Etudiant_Email.getText(),(String)Etudiant_filiere.getSelectionModel().getSelectedItem());
         setData.addEtudiant(etudiant);
         displayEtudiants();
-        alert.setAlertType(Alert.AlertType.CONFIRMATION);
+        alert.setAlertType(Alert.AlertType.INFORMATION);
         alert.setTitle("Ajout Etudiant");
         alert.setHeaderText("Ajout Etudiant effectué avec succée");
+        alert.showAndWait();
+        ResetPageEtudiant();
         }
 
     }
@@ -333,8 +343,11 @@ public class page2Controller {
             alert.setHeaderText("Veuillez remplir les champs");
             alert.showAndWait();
         }else {
+            alert.setAlertType(Alert.AlertType.INFORMATION);
             updateData.updateEtudiants(new Etudiant(id,nom,prenom,email,filiere));
             displayEtudiants();
+            ResetPageEtudiant();
+
         }
 
     }
@@ -348,6 +361,8 @@ public class page2Controller {
         }else{
             deleteData.deleteEtudiant(id);
             displayEtudiants();
+            ResetPageEtudiant();
+
         }
     }
     public void rechercheEtudiant(){

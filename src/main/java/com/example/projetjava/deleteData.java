@@ -25,7 +25,7 @@ public class deleteData {
             preparedStatement=connection.prepareStatement(sql);
             preparedStatement.setString(1, cin);
             preparedStatement.executeUpdate();
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText("Etudiant supprimé avec succée");
             alert.showAndWait();
