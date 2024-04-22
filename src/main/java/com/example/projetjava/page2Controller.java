@@ -18,6 +18,7 @@ import javafx.event.ActionEvent;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 public class page2Controller {
 
     @FXML
@@ -148,6 +149,18 @@ public class page2Controller {
 
     @FXML
     private TableView<PFE> PFE_table_view;
+
+    @FXML
+    private TextField PFE_titre;
+
+    @FXML
+    private ComboBox<String> PFE_encadrant;
+
+    @FXML
+    private ComboBox<String> PFE_etudiant1;
+
+    @FXML
+    private ComboBox<String> PFE_etudiant2;
 
     @FXML
     private Button Pfe_btn;
@@ -316,12 +329,14 @@ public class page2Controller {
         Etudiant etudiant=new Etudiant(Etudiant_ID.getText(),Etudiant_nom.getText(),Etudiant_prenom.getText(),Etudiant_Email.getText(),(String)Etudiant_filiere.getSelectionModel().getSelectedItem());
         setData.addEtudiant(etudiant);
         displayEtudiants();
-        alert.setAlertType(Alert.AlertType.CONFIRMATION);
+        alert.setAlertType(Alert.AlertType.INFORMATION);
         alert.setTitle("Ajout Etudiant");
         alert.setHeaderText("Ajout Etudiant effectué avec succée");
+        alert.showAndWait();
         }
 
     }
+
     public void ModifierEtudiant(){
         String id=Etudiant_ID.getText();
         String nom=Etudiant_nom.getText();
@@ -340,6 +355,7 @@ public class page2Controller {
         }
 
     }
+
     public void SupprimerEtudiant(){
         String id=Etudiant_ID.getText();
         if(id.isEmpty()){
@@ -352,6 +368,7 @@ public class page2Controller {
             displayEtudiants();
         }
     }
+
     public void rechercheEtudiant(){
             String data=Etudiant_recherche.getText();
             if(data.isEmpty()){
@@ -420,13 +437,16 @@ public class page2Controller {
         } else{
             Enseignant enseignant=new Enseignant(Enseignant_ID.getText(),Enseignant_nom.getText(),Enseignant_prenom.getText(),Enseignant_email.getText(),(String)Enseignant_position.getSelectionModel().getSelectedItem());
             setData.addEnseignant(enseignant);
-            displayJurys();
-            alert.setAlertType(Alert.AlertType.CONFIRMATION);
+            displayEnseignant();
+            alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setTitle("Ajout Enseignant");
             alert.setHeaderText("Ajout Enseignant effectué avec succée");
+            alert.showAndWait();
         }
 
     }
+
+    //PAGE PFE
 
     public void displayPFES() {
         PFES = getData.getPFE();
@@ -440,6 +460,57 @@ public class page2Controller {
             e.printStackTrace();
         }
     }
+
+    public void fillComboBoxEncadrant(){
+        PFE_encadrant.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    }
+
+    public void fillComboBoxEtudiant1(){
+        PFE_etudiant1.setItems(FXCollections.observableArrayList(getData.getEtudiant_ID()));
+    }
+
+    public void fillComboBoxEtudiant2(){
+        PFE_etudiant2.setItems(FXCollections.observableArrayList(getData.getEtudiant_ID()));
+    }
+
+    public void AjouterPFE(){
+        String titre = PFE_titre.getText();
+        String encadrant = (String)PFE_encadrant.getSelectionModel().getSelectedItem();
+        String etudiant1 = (String)PFE_etudiant1.getSelectionModel().getSelectedItem();
+        String etudiant2 = (String)PFE_etudiant2.getSelectionModel().getSelectedItem();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(titre.isEmpty()||PFE_encadrant.getSelectionModel().isEmpty()||PFE_etudiant1.getSelectionModel().isEmpty()||PFE_etudiant2.getSelectionModel().isEmpty()){
+
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir les champs");
+
+            alert.showAndWait();
+        }else if (etudiant1.equals(etudiant2)){
+            alert.setTitle("Erreur!");
+            alert.setHeaderText("Cin Invalide!");
+            alert.setContentText("Cin de l'étudiant 2 doit etre different de Cin de l'étudiant 1");
+            alert.showAndWait();
+        } else if (getData.existePfe(titre)) {
+
+            alert.setTitle("Erreur");
+            alert.setHeaderText("ce titre existe déja!");
+            alert.showAndWait();
+
+        } else{
+            PFE pfe = new PFE(PFE_titre.getText(),(String)PFE_encadrant.getSelectionModel().getSelectedItem(),(String)PFE_etudiant1.getSelectionModel().getSelectedItem(),(String)PFE_etudiant2.getSelectionModel().getSelectedItem());
+            setData.addPFE(pfe);
+            displayPFES();
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ajout Enseignant");
+            alert.setHeaderText("Ajout Enseignant effectué avec succée");
+            alert.showAndWait();
+        }
+
+    }
+
+
+
+    // PAGE JURY
 
     private ObservableList<Jury> Jurys;
     public void displayJurys() {
@@ -533,6 +604,9 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: transparent");
             Pfe_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
+            fillComboBoxEncadrant();
+            fillComboBoxEtudiant1();
+            fillComboBoxEtudiant2();
             displayPFES();
         }else if(event.getSource() == Soutenance_btn) {
             //Transition

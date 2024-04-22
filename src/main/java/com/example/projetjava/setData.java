@@ -4,6 +4,7 @@ package com.example.projetjava;
 import com.example.projetjava.DataClasses.Enseignant;
 import com.example.projetjava.DataClasses.Etudiant;
 
+import com.example.projetjava.DataClasses.PFE;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -55,7 +56,23 @@ public class setData {
         } catch (Exception e){
             e.printStackTrace();
         }
-
-
     }
+
+    public static void addPFE(PFE pfe){
+        String sql = "insert into PFE values(?,?,?,?)";
+        connection=database.connectDb();
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setString(1,pfe.getTitre_pfe());
+            preparedStatement.setString(2,pfe.getEnseignant());
+            preparedStatement.setString(3,pfe.getEtudiant1());
+            preparedStatement.setString(4,pfe.getEtudiant2());
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
 }

@@ -220,7 +220,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="Etudiant_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css">
+                        <AnchorPane fx:id="Etudiant_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css" visible="false">
                            <children>
                               <AnchorPane layoutX="12.0" layoutY="10.0" prefHeight="263.0" prefWidth="1110.0">
                                  <styleClass>
@@ -359,25 +359,25 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="230.0" layoutY="67.0" prefHeight="30.0" prefWidth="190.0" />
+                                    <TextField fx:id="Enseignant_ID" layoutX="230.0" layoutY="67.0" prefHeight="30.0" prefWidth="190.0" />
                                     <Label layoutX="177.0" layoutY="134.0" text="Nom:">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="230.0" layoutY="132.0" prefHeight="30.0" prefWidth="190.0" />
+                                    <TextField fx:id="Enseignant_nom" layoutX="230.0" layoutY="132.0" prefHeight="30.0" prefWidth="190.0" />
                                     <Label layoutX="162.0" layoutY="201.0" text="Prénom:">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="230.0" layoutY="199.0" prefHeight="30.0" prefWidth="190.0" />
+                                    <TextField fx:id="Enseignant_prenom" layoutX="230.0" layoutY="199.0" prefHeight="30.0" prefWidth="190.0" />
                                     <Label fx:id="ajoutetudiant" layoutX="14.0" layoutY="20.0" stylesheets="@stylesheet2.css" text="Ajouter un enseignant" textFill="#ac156e">
                                        <font>
                                           <Font name="Tahoma Bold" size="26.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="ajouter_enseignant" layoutX="857.0" layoutY="14.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Ajouter">
+                                    <Button fx:id="ajouter_enseignant" layoutX="857.0" layoutY="14.0" mnemonicParsing="false" onAction="#AjouterEnseignant" prefHeight="76.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Ajouter">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -418,13 +418,13 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="545.0" layoutY="103.0" prefHeight="30.0" prefWidth="190.0" />
+                                    <TextField fx:id="Enseignant_email" layoutX="545.0" layoutY="103.0" prefHeight="30.0" prefWidth="190.0" />
                                     <Label layoutX="476.0" layoutY="188.0" text="Position:">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox layoutX="545.0" layoutY="185.0" prefHeight="28.0" prefWidth="228.0" promptText="Choisir" />
+                                    <ComboBox fx:id="Enseignant_position" layoutX="545.0" layoutY="185.0" prefHeight="28.0" prefWidth="228.0" promptText="Choisir" />
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="12.0" layoutY="286.0" prefHeight="440.0" prefWidth="1110.0">
@@ -465,7 +465,7 @@
                               <String fx:value="white-bg" />
                            </styleClass>
                         </AnchorPane>
-                        <AnchorPane fx:id="Pfe_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css" visible="false">
+                        <AnchorPane fx:id="Pfe_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css">
                            <children>
                               <AnchorPane layoutX="12.0" layoutY="286.0" prefHeight="440.0" prefWidth="1110.0">
                                  <styleClass>
@@ -512,7 +512,6 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="125.0" layoutY="116.0" prefHeight="30.0" prefWidth="190.0" />
                                     <Label fx:id="ajoutetudiant1" layoutX="14.0" layoutY="20.0" stylesheets="@stylesheet2.css" text="Créer un PFE" textFill="#ac156e">
                                        <font>
                                           <Font name="Tahoma Bold" size="26.0" />
@@ -535,19 +534,16 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="510.0" layoutY="59.0" prefHeight="30.0" prefWidth="190.0" />
                                     <Label layoutX="404.0" layoutY="117.0" text="ID étudiant 1:">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="510.0" layoutY="115.0" prefHeight="30.0" prefWidth="190.0" />
                                     <Label layoutX="404.0" layoutY="177.0" text="ID étudiant 2:">
                                        <font>
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <TextField layoutX="510.0" layoutY="175.0" prefHeight="30.0" prefWidth="190.0" />
                                     <Button fx:id="supprimer_pfe" layoutX="852.0" layoutY="177.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
@@ -560,7 +556,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="ajouter_pfe" layoutX="852.0" layoutY="20.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Ajouter">
+                                    <Button fx:id="ajouter_pfe" layoutX="852.0" layoutY="20.0" mnemonicParsing="false" onAction="#AjouterPFE" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Ajouter">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -572,6 +568,10 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
+                                    <ComboBox fx:id="PFE_encadrant" layoutX="510.0" layoutY="59.0" prefHeight="28.0" prefWidth="228.0" promptText="Choisir" />
+                                    <ComboBox fx:id="PFE_etudiant1" layoutX="510.0" layoutY="117.0" prefHeight="28.0" prefWidth="228.0" promptText="Choisir" />
+                                    <ComboBox fx:id="PFE_etudiant2" layoutX="510.0" layoutY="176.0" prefHeight="28.0" prefWidth="228.0" promptText="Choisir" />
+                                    <TextField fx:id="PFE_titre" layoutX="125.0" layoutY="116.0" prefHeight="30.0" prefWidth="227.0" />
                                  </children>
                               </AnchorPane>
                            </children>

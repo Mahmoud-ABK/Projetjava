@@ -46,6 +46,25 @@ public class getData {
         return listEtudiant;
     }
 
+    public static ObservableList<String> getEtudiant_ID() {
+        ObservableList<String> listEtudiant_ID = FXCollections.observableArrayList();
+        String sql = "SELECT ID FROM etudiant";
+        connection =database.connectDb();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            String etudiant_ID;
+            while (resultSet.next()) {
+                etudiant_ID = resultSet.getString(1);
+                listEtudiant_ID.add(etudiant_ID);
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return listEtudiant_ID;
+    }
+
+
     public static ObservableList<Enseignant> getEnseignant() {
         ObservableList<Enseignant> listEnseignant = FXCollections.observableArrayList();
         String sql = "SELECT * FROM enseignant";
@@ -67,6 +86,25 @@ public class getData {
 
         return listEnseignant;
     }
+
+    public static ObservableList<String> getEnseignant_ID() {
+        ObservableList<String> listEnseignant_ID = FXCollections.observableArrayList();
+        String sql = "SELECT ID FROM enseignant";
+        connection =database.connectDb();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            String enseignant_ID;
+            while (resultSet.next()) {
+                enseignant_ID = resultSet.getString(1);
+                listEnseignant_ID.add(enseignant_ID);
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return listEnseignant_ID;
+    }
+
 
     public static ObservableList<PFE> getPFE() {
         ObservableList<PFE> listPFE = FXCollections.observableArrayList();
@@ -145,7 +183,7 @@ public class getData {
         return false;
     }
 
-    public static boolean existePfe(String cin) {
+    public static boolean existePfe(String titre) {
         connection=database.connectDb();
         String sql = "SELECT * FROM pfe ";
         try{
@@ -153,7 +191,7 @@ public class getData {
             resultSet=preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                if(cin.equals(resultSet.getString(1))){
+                if(titre.equals(resultSet.getString(1))){
                     return true;
                 }
             }
