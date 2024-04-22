@@ -8,16 +8,22 @@ public class Jury {
     private String examinateur;
     private String enseignant;
     private String invite ;
-    private String filiere;
     private String titre_pfe;
 
-    public Jury(String president, String rapporteur, String examinateur, String enseignant, String invite, String filiere, String titre_pfe) {
+    public Jury(String titre_pfe, String president, String rapporteur, String examinateur, String enseignant, String invite) {
         this.president = president;
         this.rapporteur = rapporteur;
         this.examinateur = examinateur;
         this.enseignant = enseignant;
         this.invite = invite;
-        this.filiere = filiere;
+        this.titre_pfe = titre_pfe;
+    }
+
+    public Jury(String titre_pfe, String president, String rapporteur, String examinateur, String enseignant) {
+        this.president = president;
+        this.rapporteur = rapporteur;
+        this.examinateur = examinateur;
+        this.enseignant = enseignant;
         this.titre_pfe = titre_pfe;
     }
 
@@ -59,14 +65,6 @@ public class Jury {
 
     public void setInvite(String invite) {
         this.invite = invite;
-    }
-
-    public String getFiliere() {
-        return filiere;
-    }
-
-    public void setFiliere(String filiere) {
-        this.filiere = filiere;
     }
 
     public String getTitre_pfe() {
