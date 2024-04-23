@@ -767,7 +767,6 @@
                                     </Label>
                                     <ComboBox fx:id="Soutenance_titrePFE" layoutX="119.0" layoutY="155.0" prefHeight="28.0" prefWidth="228.0" promptText="Choisir" />
                                     <DatePicker fx:id="Soutenance_Date" layoutX="509.0" layoutY="59.0" prefHeight="26.0" prefWidth="223.0" />
-                                    <DatePicker fx:id="Soutenance_Heure" layoutX="509.0" layoutY="110.0" prefHeight="26.0" prefWidth="223.0" />
                                     <Label layoutX="444.0" layoutY="207.0" text="Note:">
                                        <font>
                                           <Font size="16.0" />
@@ -798,6 +797,13 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
+                                    <ComboBox fx:id="Soutenance_Heure" layoutX="521.0" layoutY="114.0" prefHeight="28.0" prefWidth="67.0" />
+                                    <ComboBox fx:id="Soutenance_Minute" layoutX="672.0" layoutY="114.0" prefHeight="28.0" prefWidth="67.0" />
+                                    <Label layoutX="606.0" layoutY="115.0" text="Minute:">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
                                  </children>
                               </AnchorPane>
                               <AnchorPane layoutX="12.0" layoutY="286.0" prefHeight="440.0" prefWidth="1110.0">

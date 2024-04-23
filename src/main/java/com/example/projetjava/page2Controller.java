@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class page2Controller {
@@ -252,7 +253,10 @@ public class page2Controller {
     private DatePicker Soutenance_Date;
 
     @FXML
-    private DatePicker Soutenance_Heure;
+    private ComboBox<String> Soutenance_Heure;
+    @FXML
+    private ComboBox<String> Soutenance_Minute;
+
 
     @FXML
     private TextField Soutenance_Note;
@@ -271,6 +275,8 @@ public class page2Controller {
 
     @FXML
     private ComboBox<String> Soutenance_titrePFE;
+
+
 
 
     private ObservableList<PFE> PFES;
@@ -432,11 +438,54 @@ public class page2Controller {
         }
     }
     //page soutenance
+    public void fillComboBoxTime(){
+        ArrayList<String> heures=new ArrayList<>();
+        ArrayList<String> minutes=new ArrayList<>();
+
+        for (int i = 0; i <60; i++) {
+            if(i<10){
+                minutes.add("0"+i);
+            }else {
+                minutes.add(String.valueOf(i));
+            }
+        }
+        for (int i = 7; i <18 ; i++) {
+            if(i<10){
+                heures.add("0"+i);
+
+            }else {
+                heures.add(String.valueOf(i));
+            }
+
+        }
+       Soutenance_Minute.setItems(FXCollections.observableArrayList(minutes));
+        Soutenance_Heure.setItems(FXCollections.observableArrayList(heures));
+
+    }
     public void prepareSoutenance(){
         String titre_pfe=(String) Soutenance_titrePFE.getSelectionModel().getSelectedItem();
-        LocalDate dateSoutenance = Soutenance_Date.getValue();
-        LocalTime heureSoutenance =LocalTime.from( Soutenance_Heure.getValue());
-        System.out.println(heureSoutenance);
+        LocalDate dateSoutenance ;
+        String heure = Soutenance_Heure.getSelectionModel().getSelectedItem();
+        String minute=Soutenance_Minute.getSelectionModel().getSelectedItem();
+        String salle= Soutenance_Salle.getText();
+        String note= Soutenance_Note.getText();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if (Soutenance_titrePFE.getSelectionModel().isEmpty()|| Soutenance_Date.getValue()==null|| Soutenance_Heure.getSelectionModel().isEmpty() || Soutenance_Minute.getSelectionModel().isEmpty()){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir Les Champs ");
+        }else {
+            dateSoutenance=Soutenance_Date.getValue();
+            if ( LocalDate.now().isBefore(dateSoutenance) || !(note.isEmpty()) ) {
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Tu ne peux pas mettre le note avant la date de soutenance");
+
+            }else{
+                //
+            }
+        }
+
+
+
 
 
     }
@@ -530,6 +579,7 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: transparent");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
+            fillComboBoxTime();
         }
 
 
