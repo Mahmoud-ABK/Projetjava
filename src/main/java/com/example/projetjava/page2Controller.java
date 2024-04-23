@@ -502,6 +502,8 @@ public class page2Controller {
     }
 
     //PAGE PFE
+    @FXML
+
 
     public void displayPFES() {
         PFES = getData.getPFE();
@@ -606,6 +608,11 @@ public class page2Controller {
         Soutenance_Heure.setItems(FXCollections.observableArrayList(heures));
 
     }
+
+    public void fillComboBoxTitrepfeSoutenance(){
+
+        Soutenance_titrePFE.setItems(FXCollections.observableArrayList(getData.getPFE_Titre()));
+    }
     public void prepareSoutenance(){
         String titre_pfe=(String) Soutenance_titrePFE.getSelectionModel().getSelectedItem();
         LocalDate dateSoutenance ;
@@ -618,17 +625,32 @@ public class page2Controller {
             alert.setTitle("Erreur");
             alert.setHeaderText("Veuillez remplir Les Champs ");
             alert.showAndWait();
-        }else {
+        } else if (false) {
+         // ychouf f soutenance
+
+        } else {
             dateSoutenance=Soutenance_Date.getValue();
-            if ( LocalDate.now().isBefore(dateSoutenance) || !(note.isEmpty()) ) {
+            if ( LocalDate.now().isBefore(dateSoutenance) && !(note.isEmpty()) ) {
                 alert.setTitle("Erreur");
                 alert.setHeaderText("Tu ne peux pas mettre le note avant la date de soutenance");
                 alert.showAndWait();
 
             }else{
-                String valide= (Integer.getInteger(note)>10)?"Validee":"non validee";
+                soutenance sout;
+                String valide="";
+                if(note.isEmpty()){
+                   sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,0,valide);
+                }
+                else{
+                    valide= (Float.parseFloat(note)>10)?"Validee":"non validee";
+                    sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,Float.parseFloat(note),valide);
 
-                soutenance sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,Integer.getInteger(note),valide);
+                }
+                setData.addSoutenance(sout);
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setTitle("Ajout Soutenance");
+                alert.setHeaderText("Ajout Soutenance avec succee");
+
                 System.out.println(sout.toString());
             }
         }
@@ -734,6 +756,7 @@ public class page2Controller {
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
             fillComboBoxTime();
+            fillComboBoxTitrepfeSoutenance();
         }
 
 

@@ -199,5 +199,23 @@ public class getData {
         }catch (Exception e){e.printStackTrace();}
         return false;
     }
+    public static ObservableList<String> getPFE_Titre() {
+        ObservableList<String> PFE_ID = FXCollections.observableArrayList();
+        String sql = "SELECT Titre_Pfe FROM pfe";
+        connection =database.connectDb();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            String pfe_id;
+            while (resultSet.next()) {
+                pfe_id = resultSet.getString(1);
+                PFE_ID.add(pfe_id);
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return PFE_ID;
+    }
+
 }
 
