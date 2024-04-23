@@ -199,6 +199,22 @@ public class getData {
         }catch (Exception e){e.printStackTrace();}
         return false;
     }
+    public static boolean existePfedansSoutenance(String titre) {
+        connection=database.connectDb();
+        String sql = "SELECT * FROM soutenance ";
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                if(titre.equals(resultSet.getString(1))){
+                    return true;
+                }
+            }
+
+        }catch (Exception e){e.printStackTrace();}
+        return false;
+    }
     public static ObservableList<String> getPFE_Titre() {
         ObservableList<String> PFE_ID = FXCollections.observableArrayList();
         String sql = "SELECT Titre_Pfe FROM pfe";

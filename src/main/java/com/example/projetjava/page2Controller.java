@@ -625,8 +625,10 @@ public class page2Controller {
             alert.setTitle("Erreur");
             alert.setHeaderText("Veuillez remplir Les Champs ");
             alert.showAndWait();
-        } else if (false) {
-         // ychouf f soutenance
+        } else if (getData.existePfedansSoutenance(titre_pfe)) {
+         alert.setTitle("Erreur");
+         alert.setHeaderText("ce pfe deja a une soutenance");
+         alert.showAndWait();
 
         } else {
             dateSoutenance=Soutenance_Date.getValue();
