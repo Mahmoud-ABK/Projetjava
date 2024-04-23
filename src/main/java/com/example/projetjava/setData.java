@@ -1,7 +1,7 @@
 package com.example.projetjava;
 
 
-import com.example.projetjava.DataClasses.Etudiant;
+import com.example.projetjava.DataClasses.*;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,4 +38,26 @@ public class setData {
 
 
     }
+    public static void addSoutenance(soutenance s){
+        String sql = "insert into soutenance values(?,?,?,?,?,?)";
+        connection=database.connectDb();
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setString(1,s.getTitre_pfe());
+            preparedStatement.setString(2,s.getDate());
+            preparedStatement.setString(3,s.getHeure());
+            preparedStatement.setString(4,s.getSalle());
+            preparedStatement.setFloat(5,s.getNote());
+            preparedStatement.setString(6,s.getValidite());
+            preparedStatement.executeUpdate();
+
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
 }

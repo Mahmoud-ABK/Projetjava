@@ -473,14 +473,19 @@ public class page2Controller {
         if (Soutenance_titrePFE.getSelectionModel().isEmpty()|| Soutenance_Date.getValue()==null|| Soutenance_Heure.getSelectionModel().isEmpty() || Soutenance_Minute.getSelectionModel().isEmpty()){
             alert.setTitle("Erreur");
             alert.setHeaderText("Veuillez remplir Les Champs ");
+            alert.showAndWait();
         }else {
             dateSoutenance=Soutenance_Date.getValue();
             if ( LocalDate.now().isBefore(dateSoutenance) || !(note.isEmpty()) ) {
                 alert.setTitle("Erreur");
                 alert.setHeaderText("Tu ne peux pas mettre le note avant la date de soutenance");
+                alert.showAndWait();
 
             }else{
-                //
+                String valide= (Integer.getInteger(note)>10)?"Validee":"non validee";
+
+                soutenance sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,Integer.getInteger(note),valide);
+                System.out.println(sout.toString());
             }
         }
 
