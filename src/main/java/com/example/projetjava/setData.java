@@ -38,6 +38,40 @@ public class setData {
 
 
     }
+
+    public static void addEnseignant(Enseignant enseignant){
+        String sql = "insert into enseignant values(?,?,?,?,?)";
+        connection=database.connectDb();
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setString(1,enseignant.getCin());
+            preparedStatement.setString(2,enseignant.getNom());
+            preparedStatement.setString(3,enseignant.getPrenom());
+            preparedStatement.setString(4,enseignant.getEmail());
+            preparedStatement.setString(5, enseignant.getPosition());
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void addPFE(PFE pfe){
+        String sql = "insert into PFE values(?,?,?,?)";
+        connection=database.connectDb();
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setString(1,pfe.getTitre_pfe());
+            preparedStatement.setString(2,pfe.getEnseignant());
+            preparedStatement.setString(3,pfe.getEtudiant1());
+            preparedStatement.setString(4,pfe.getEtudiant2());
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     public static void addSoutenance(soutenance s){
         String sql = "insert into soutenance values(?,?,?,?,?,?)";
         connection=database.connectDb();

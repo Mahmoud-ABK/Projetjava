@@ -3,6 +3,7 @@ package com.example.projetjava;
 import com.example.projetjava.DataClasses.Enseignant;
 import com.example.projetjava.DataClasses.Etudiant;
 
+import com.example.projetjava.DataClasses.Jury;
 import com.example.projetjava.DataClasses.PFE;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +21,7 @@ public class getData {
     public static ArrayList<String> etudiantsCIN=new ArrayList<>();
     public static ArrayList<String> enseignantsCIN=new ArrayList<>();
     public static ArrayList<String> pfeid=new ArrayList<>();
+
     public static ObservableList<Etudiant> getEtudiants() {
     ObservableList<Etudiant> listEtudiant = FXCollections.observableArrayList();
     String sql = "SELECT * FROM etudiant";
@@ -43,6 +45,26 @@ public class getData {
 
         return listEtudiant;
     }
+
+    public static ObservableList<String> getEtudiant_ID() {
+        ObservableList<String> listEtudiant_ID = FXCollections.observableArrayList();
+        String sql = "SELECT ID FROM etudiant";
+        connection =database.connectDb();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            String etudiant_ID;
+            while (resultSet.next()) {
+                etudiant_ID = resultSet.getString(1);
+                listEtudiant_ID.add(etudiant_ID);
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return listEtudiant_ID;
+    }
+
+
     public static ObservableList<Enseignant> getEnseignant() {
         ObservableList<Enseignant> listEnseignant = FXCollections.observableArrayList();
         String sql = "SELECT * FROM enseignant";
@@ -65,6 +87,25 @@ public class getData {
         return listEnseignant;
     }
 
+    public static ObservableList<String> getEnseignant_ID() {
+        ObservableList<String> listEnseignant_ID = FXCollections.observableArrayList();
+        String sql = "SELECT ID FROM enseignant";
+        connection =database.connectDb();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            String enseignant_ID;
+            while (resultSet.next()) {
+                enseignant_ID = resultSet.getString(1);
+                listEnseignant_ID.add(enseignant_ID);
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return listEnseignant_ID;
+    }
+
+
     public static ObservableList<PFE> getPFE() {
         ObservableList<PFE> listPFE = FXCollections.observableArrayList();
         String sql = "SELECT * FROM PFE";
@@ -85,6 +126,29 @@ public class getData {
 
         return listPFE;
     }
+
+    public static ObservableList<Jury> getJury() {
+        ObservableList<Jury> listJury = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM jury";
+        connection =database.connectDb();
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            Jury jury;
+            while (resultSet.next()) {
+                jury = new Jury(resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
+                        resultSet.getString(6));
+                listJury.add(jury);
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return listJury;
+    }
+
     public static boolean existeDansEtudiants(String cin) {
         connection=database.connectDb();
         String sql = "SELECT * FROM etudiant ";
@@ -101,6 +165,7 @@ public class getData {
         }catch (Exception e){e.printStackTrace();}
         return false;
     }
+
     public static boolean existeEnseignant(String cin) {
         connection=database.connectDb();
         String sql = "SELECT * FROM enseignant ";
@@ -117,7 +182,8 @@ public class getData {
         }catch (Exception e){e.printStackTrace();}
         return false;
     }
-    public static boolean existePfe(String cin) {
+
+    public static boolean existePfe(String titre) {
         connection=database.connectDb();
         String sql = "SELECT * FROM pfe ";
         try{
@@ -125,7 +191,7 @@ public class getData {
             resultSet=preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                if(cin.equals(resultSet.getString(1))){
+                if(titre.equals(resultSet.getString(1))){
                     return true;
                 }
             }
