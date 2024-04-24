@@ -1,6 +1,6 @@
 package com.example.projetjava;
 
-import com.example.projetjava.DataClasses.Enseignant;
+import com.example.projetjava.DataClasses.*;
 import com.example.projetjava.DataClasses.Etudiant;
 
 import com.example.projetjava.DataClasses.Jury;
@@ -147,6 +147,23 @@ public class getData {
         }catch (Exception e){e.printStackTrace();}
 
         return listJury;
+    }
+    public static ObservableList<soutenance> getSoutenance() {
+        ObservableList<soutenance> listSoutenance = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM soutenance";
+        connection =database.connectDb();
+        try {
+            preparedStatement =connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            soutenance sout;
+            while (resultSet.next()) {
+                sout = new soutenance(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getFloat(5),resultSet.getString(6));
+                listSoutenance.add(sout);
+            }
+
+        }catch (Exception e){e.printStackTrace();
+        }
+        return listSoutenance;
     }
 
     public static boolean existeDansEtudiants(String cin) {
