@@ -64,6 +64,46 @@ public class getData {
         return listEtudiant_ID;
     }
 
+    public static ObservableList<String> getJury_titre() {
+        ObservableList<String> listJury_titre = FXCollections.observableArrayList();
+        String sql = "SELECT Titre_Pfe FROM pfe";
+        connection =database.connectDb();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            String Jury_titre;
+            while (resultSet.next()) {
+                Jury_titre = resultSet.getString(1);
+                listJury_titre.add(Jury_titre);
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return listJury_titre;
+    }
+
+    public static String getJury_Encadrant(String titre) {
+        String encadrant = null;
+        String sql = "SELECT Titre_Pfe,ID_Enseignant FROM pfe";
+        connection =database.connectDb();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            String Jury_titre;
+            String enseignant;
+            while (resultSet.next()) {
+                Jury_titre = resultSet.getString(1);
+                enseignant = resultSet.getString(2);
+                if (Jury_titre.equals(titre)) {
+                    encadrant = enseignant;
+                }
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return encadrant;
+    }
+
 
     public static ObservableList<Enseignant> getEnseignant() {
         ObservableList<Enseignant> listEnseignant = FXCollections.observableArrayList();
@@ -183,9 +223,26 @@ public class getData {
         return false;
     }
 
-    public static boolean existePfe(String titre) {
+    public static boolean existePfeDansPFE(String titre) {
         connection=database.connectDb();
         String sql = "SELECT * FROM pfe ";
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                if(titre.equals(resultSet.getString(1))){
+                    return true;
+                }
+            }
+
+        }catch (Exception e){e.printStackTrace();}
+        return false;
+    }
+
+    public static boolean existePfeDansJury(String titre) {
+        connection=database.connectDb();
+        String sql = "SELECT * FROM jury ";
         try{
             preparedStatement=connection.prepareStatement(sql);
             resultSet=preparedStatement.executeQuery();

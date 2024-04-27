@@ -72,6 +72,26 @@ public class setData {
         }
     }
 
+    public static void addJury(Jury jury){
+        String sql = "insert into Jury values(?,?,?,?,?,?)";
+        String encadrant = getData.getJury_Encadrant(jury.getTitre_pfe());
+        connection=database.connectDb();
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            preparedStatement.setString(1, jury.getTitre_pfe());
+            preparedStatement.setString(2, jury.getPresident());
+            preparedStatement.setString(3, jury.getExaminateur());
+            preparedStatement.setString(4, jury.getRapporteur());
+            preparedStatement.setString(5, jury.getEnseignant());
+            preparedStatement.setString(6, jury.getInvite());
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
     public static void addSoutenance(soutenance s){
         String sql = "insert into soutenance values(?,?,?,?,?,?)";
         connection=database.connectDb();

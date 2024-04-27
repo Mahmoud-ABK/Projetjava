@@ -132,6 +132,24 @@ public class page2Controller {
     private TableColumn<Jury, String> Jury_col_titre;
 
     @FXML
+    private ComboBox<String> Jury_president;
+
+    @FXML
+    private ComboBox<String> Jury_rapporteur;
+
+    @FXML
+    private ComboBox<String> Jury_examinateur;
+
+    @FXML
+    private TextField Jury_invite;
+
+    @FXML
+    private ComboBox<String> Jury_filiere;
+
+    @FXML
+    private ComboBox<String> Jury_titre;
+
+    @FXML
     private AnchorPane Jury_form;
 
     @FXML
@@ -371,7 +389,7 @@ public class page2Controller {
         displayEtudiants();
         alert.setAlertType(Alert.AlertType.INFORMATION);
         alert.setTitle("Ajout Etudiant");
-        alert.setHeaderText("Ajout Etudiant effectué avec succée");
+        alert.setHeaderText("Ajout Etudiant effectué avec succès");
         alert.showAndWait();
         ResetPageEtudiant();
         alert.showAndWait();
@@ -495,7 +513,7 @@ public class page2Controller {
             displayEnseignant();
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setTitle("Ajout Enseignant");
-            alert.setHeaderText("Ajout Enseignant effectué avec succée");
+            alert.setHeaderText("Ajout Enseignant effectué avec succès");
             alert.showAndWait();
         }
 
@@ -545,7 +563,7 @@ public class page2Controller {
             alert.setHeaderText("Cin Invalide!");
             alert.setContentText("Cin de l'étudiant 2 doit etre different de Cin de l'étudiant 1");
             alert.showAndWait();
-        } else if (getData.existePfe(titre)) {
+        } else if (getData.existePfeDansPFE(titre)) {
 
             alert.setTitle("Erreur");
             alert.setHeaderText("ce titre existe déja!");
@@ -557,11 +575,12 @@ public class page2Controller {
             displayPFES();
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setTitle("Ajout Enseignant");
-            alert.setHeaderText("Ajout Enseignant effectué avec succée");
+            alert.setHeaderText("Ajout Enseignant effectué avec succès");
             alert.showAndWait();
         }
 
     }
+
 
     // PAGE JURY
 
@@ -581,7 +600,73 @@ public class page2Controller {
         }
     }
 
-    //page soutenance
+
+    public void AjouterJury(){
+        String president = (String)Jury_president.getSelectionModel().getSelectedItem();
+        String examinateur = (String)Jury_examinateur.getSelectionModel().getSelectedItem();
+        String rapporteur = (String)Jury_rapporteur.getSelectionModel().getSelectedItem();
+        String titre = (String)Jury_titre.getSelectionModel().getSelectedItem();
+        String encadrant = getData.getJury_Encadrant(titre);
+        String invite = Jury_invite.getText();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(Jury_titre.getSelectionModel().isEmpty()|| Jury_president.getSelectionModel().isEmpty()|| Jury_examinateur.getSelectionModel().isEmpty()||Jury_rapporteur.getSelectionModel().isEmpty()){
+
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir les champs");
+
+            alert.showAndWait();
+        } else if (!getData.existePfeDansPFE(titre)) {
+
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Aucun PFE avec ce titre !");
+            alert.showAndWait();
+
+        } else if (getData.existePfeDansJury(titre)) {
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Le PFE ayant ce titre est déja planifié!");
+            alert.showAndWait();
+        } else if (president.equals(rapporteur)) {
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Il faut choisir des differents ID pour:\n-Le President\n-L'Examinateur\n-Le Rapporteur");
+            alert.showAndWait();
+        }
+        else if (president.equals(examinateur)) {
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Il faut choisir des differents ID pour:\n-Le President\n-L'Examinateur\n-Le Rapporteur");
+            alert.showAndWait();
+        }else if (rapporteur.equals(examinateur)) {
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Il faut choisir des differents ID pour:\n-Le President\n-L'Examinateur\n-Le Rapporteur");
+            alert.showAndWait();
+        }  else{
+            Jury jury = new Jury(titre, president, rapporteur, examinateur, encadrant, invite);
+            setData.addJury(jury);
+            displayJurys();
+            alert.setAlertType(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ajout Jury");
+            alert.setHeaderText("Ajout Jury effectué avec succès");
+            alert.showAndWait();
+        }
+
+    }
+
+    public void fillComboBoxTitre(){
+        Jury_titre.setItems(FXCollections.observableArrayList(getData.getJury_titre()));
+    }
+
+    public void fillComboBoxPresident(){
+        Jury_president.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    }
+
+    public void fillComboBoxExaminateur(){
+        Jury_examinateur.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    }
+
+    public void fillComboBoxRapporteur(){
+        Jury_rapporteur.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    }
+
+    //PAGE SOUTENANCE
     public void fillComboBoxTime(){
         ArrayList<String> heures=new ArrayList<>();
         ArrayList<String> minutes=new ArrayList<>();
@@ -606,6 +691,7 @@ public class page2Controller {
         Soutenance_Heure.setItems(FXCollections.observableArrayList(heures));
 
     }
+
     public void prepareSoutenance(){
         String titre_pfe=(String) Soutenance_titrePFE.getSelectionModel().getSelectedItem();
         LocalDate dateSoutenance ;
@@ -700,6 +786,10 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
+            fillComboBoxTitre();
+            fillComboBoxPresident();
+            fillComboBoxExaminateur();
+            fillComboBoxRapporteur();
             displayJurys();
         }else if(event.getSource() == Pfe_btn) {
             //Transition
