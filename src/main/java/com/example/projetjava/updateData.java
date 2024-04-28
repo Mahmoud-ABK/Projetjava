@@ -1,9 +1,6 @@
 package com.example.projetjava;
-import com.example.projetjava.DataClasses.Enseignant;
-import com.example.projetjava.DataClasses.Etudiant;
+import com.example.projetjava.DataClasses.*;
 
-import com.example.projetjava.DataClasses.Jury;
-import com.example.projetjava.DataClasses.PFE;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -77,7 +74,7 @@ public class updateData {
 
     public static void updatePFE(PFE pfe) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        if(!getData.existePfeDansPFE(pfe.getTitre_pfe())){
+        if(!getData.existePfedansPFE(pfe.getTitre_pfe())){
             alert.setTitle("Erreur");
             alert.setHeaderText("Ce titre n'existe pas");
             alert.showAndWait();
@@ -121,6 +118,36 @@ public class updateData {
                 preparedStatement.setString(4, jury.getEnseignant());
                 preparedStatement.setString(5, jury.getInvite());
                 preparedStatement.setString(6, jury.getTitre_pfe());
+                preparedStatement.executeUpdate();
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setTitle("modification");
+                alert.setHeaderText("modification effectué avec succès");
+                alert.showAndWait();
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+    public static void updateSoutenance(soutenance s) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(!getData.existePfeDansJury(s.getTitre_pfe())){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Ce titre n'existe pas");
+            alert.showAndWait();
+        } else {
+            String sql = "update soutenance set  date = ?, heure = ? , salle = ? , note = ?, validite=? where titre_pfe = ?";
+            connection=database.connectDb();
+            try {
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, s.getDate());
+                preparedStatement.setString(2, s.getHeure());
+                preparedStatement.setString(3, s.getSalle());
+                preparedStatement.setFloat(4, s.getNote());
+                preparedStatement.setString(5, s.getValidite());
+                preparedStatement.setString(6, s.getTitre_pfe());
                 preparedStatement.executeUpdate();
                 alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setTitle("modification");

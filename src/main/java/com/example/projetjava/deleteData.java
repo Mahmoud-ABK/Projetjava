@@ -65,7 +65,7 @@ public class deleteData {
     }
 
     public static void deletePFE(String titre) {
-        if (getData.existePfeDansPFE(titre)==false) {
+        if (getData.existePfedansPFE(titre)==false) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Erreur");
             alert.setHeaderText("Titre inexistant");
@@ -104,6 +104,29 @@ public class deleteData {
                 Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
                 alert1.setTitle("Confirmation");
                 alert1.setHeaderText("Jury supprimé avec succès");
+                alert1.showAndWait();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+    public static void deleteSoutenance(String titre) {
+        if (getData.existePfedansSoutenance(titre)==false) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Titre inexistant");
+            alert.showAndWait();
+        }else {
+            String sql = "DELETE FROM soutenance WHERE titre_pfe = ?";
+            connection=database.connectDb();
+            try{
+                preparedStatement=connection.prepareStatement(sql);
+                preparedStatement.setString(1, titre);
+                preparedStatement.executeUpdate();
+                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                alert1.setTitle("Confirmation");
+                alert1.setHeaderText("Soutenance supprimé avec succès");
                 alert1.showAndWait();
             }catch (Exception e){
                 e.printStackTrace();

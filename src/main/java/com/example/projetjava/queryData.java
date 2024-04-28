@@ -38,6 +38,31 @@ public class queryData {
         return listEtudiant;
     }
 
+    public static ObservableList<Enseignant> getQueryJury(String data) {
+        ObservableList<Enseignant> listEnseignant = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM Jury where UPPER(titre_pfe) ";
+        connection =database.connectDb();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, data.toUpperCase());
+            preparedStatement.setString(2, data.toUpperCase());
+            preparedStatement.setString(3, data.toUpperCase());
+            resultSet = preparedStatement.executeQuery();
+            Enseignant enseignant;
+            while (resultSet.next()) {
+                enseignant=new Enseignant(resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5));
+                listEnseignant.add(enseignant);
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+
+        return listEnseignant;
+    }
     public static ObservableList<Enseignant> getQueryEnseignants(String data) {
         ObservableList<Enseignant> listEnseignant = FXCollections.observableArrayList();
         String sql = "SELECT * FROM enseignant where UPPER(id) like CONCAT(?,'%') OR UPPER(nom) like CONCAT(?,'%') OR UPPER(prenom) like CONCAT(?,'%')";

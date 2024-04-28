@@ -195,28 +195,28 @@ public class page2Controller {
     private Button Soutenance_btn;
 
     @FXML
-    private TableColumn<?, ?> Soutenance_col_date;
+    private TableColumn<soutenance, String> Soutenance_col_date;
 
     @FXML
-    private TableColumn<?, ?> Soutenance_col_heure;
+    private TableColumn<soutenance, String> Soutenance_col_heure;
 
     @FXML
-    private TableColumn<?, ?> Soutenance_col_note;
+    private TableColumn<soutenance, Float> Soutenance_col_note;
 
     @FXML
-    private TableColumn<?, ?> Soutenance_col_salle;
+    private TableColumn<soutenance, String> Soutenance_col_salle;
 
     @FXML
-    private TableColumn<?, ?> Soutenance_col_titre;
+    private TableColumn<soutenance, String> Soutenance_col_titre;
 
     @FXML
-    private TableColumn<?, ?> Soutenance_col_validite;
+    private TableColumn<soutenance, String> Soutenance_col_validite;
 
     @FXML
     private AnchorPane Soutenance_form;
 
     @FXML
-    private TableView<?> Soutenance_table_view;
+    private TableView<soutenance> Soutenance_table_view;
 
     @FXML
     private AnchorPane TOP;
@@ -683,7 +683,7 @@ public class page2Controller {
             alert.setHeaderText("Cin Invalide!");
             alert.setContentText("Cin de l'étudiant 2 doit etre different de Cin de l'étudiant 1");
             alert.showAndWait();
-        } else if (getData.existePfeDansPFE(titre)) {
+        } else if (getData.existePfedansPFE(titre)) {
 
             alert.setTitle("Erreur");
             alert.setHeaderText("ce titre existe déja!");
@@ -768,7 +768,13 @@ public class page2Controller {
 
 
     // PAGE JURY
-
+    public  void fillComboxpagejury(){
+        fillComboBoxExaminateur();
+        fillComboBoxTitre();
+        fillComboBoxExaminateur();
+        fillComboBoxPresident();
+        fillComboBoxRapporteur();
+    }
     public void fillComboBoxTitre(){
         Jury_titre.setItems(FXCollections.observableArrayList(getData.getJury_titre()));
     }
@@ -835,7 +841,7 @@ public class page2Controller {
             alert.setHeaderText("Veuillez remplir les champs");
 
             alert.showAndWait();
-        } else if (!getData.existePfeDansPFE(titre)) {
+        } else if (!getData.existePfedansPFE(titre)) {
 
             alert.setTitle("Erreur");
             alert.setHeaderText("Aucun PFE avec ce titre !");
@@ -983,30 +989,35 @@ public class page2Controller {
                 alert.showAndWait();
 
             }else{
-                soutenance sout;
-                String valide="";
-                if(note.isEmpty()){
-                   sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,0,valide);
-                }
-                else{
-                    valide= (Float.parseFloat(note)>10)?"Validee":"non validee";
-                    sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,Float.parseFloat(note),valide);
+                String valide= (Integer.getInteger(note)>10)?"Validee":"non validee";
 
-                }
-                setData.addSoutenance(sout);
-                alert.setAlertType(Alert.AlertType.INFORMATION);
-                alert.setTitle("Ajout Soutenance");
-                alert.setHeaderText("Ajout Soutenance avec succee");
-                alert.showAndWait();
+                soutenance sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,Float.parseFloat(note),valide);
+
 
                 System.out.println(sout.toString());
             }
+
+
+
+
+
+
+
+    }
+    private ObservableList<soutenance> soutenances;
+    public void displaySoutenance(){
+        soutenances=getData.getSoutenance();
+        try{
+            Soutenance_col_titre.setCellValueFactory(new PropertyValueFactory<soutenance, String>("titre_pfe"));
+            Soutenance_col_date.setCellValueFactory(new PropertyValueFactory<soutenance, String>("date"));
+            Soutenance_col_heure.setCellValueFactory(new PropertyValueFactory<soutenance, String>("heure"));
+            Soutenance_col_salle.setCellValueFactory(new PropertyValueFactory<soutenance, String>("salle"));
+            Soutenance_col_note.setCellValueFactory(new PropertyValueFactory<soutenance, Float>("note"));
+            Soutenance_col_validite.setCellValueFactory(new PropertyValueFactory<soutenance, String>("validite"));
+            Soutenance_table_view.setItems(soutenances);
+        } catch(Exception e){
+            e.printStackTrace();
         }
-
-
-
-
-
     }
 
     public void switchForm(ActionEvent event) {
@@ -1070,7 +1081,9 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
+
             displayJurys();
+            fillComboxpagejury();
         }else if(event.getSource() == Pfe_btn) {
             //Transition
             Acceuil_form.setVisible(false);
@@ -1103,7 +1116,9 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: transparent");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
+            fillComboBoxTitrepfeSoutenance();
             fillComboBoxTime();
+            displaySoutenance();
         }
     }
 

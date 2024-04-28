@@ -8,7 +8,7 @@ public class soutenance {
     String heure;
     String salle;
     float note;
-    String validite;
+    String validite="";
     public soutenance(String titre_pfe, String date, String heure, String salle, float note, String validite) {
         this.titre_pfe = titre_pfe;
         this.date = date;

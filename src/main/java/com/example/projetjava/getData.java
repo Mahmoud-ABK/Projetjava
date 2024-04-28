@@ -290,6 +290,22 @@ public class getData {
         }catch (Exception e){e.printStackTrace();}
         return false;
     }
+    public static boolean existePfedansPFE(String titre) {
+        connection=database.connectDb();
+        String sql = "SELECT * FROM pfe ";
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                if(titre.equals(resultSet.getString(1))){
+                    return true;
+                }
+            }
+
+        }catch (Exception e){e.printStackTrace();}
+        return false;
+    }
     public static boolean existePfedansSoutenance(String titre) {
         connection=database.connectDb();
         String sql = "SELECT * FROM soutenance ";
