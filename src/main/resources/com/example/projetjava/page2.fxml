@@ -220,7 +220,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="Etudiant_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css" visible="false">
+                        <AnchorPane fx:id="Etudiant_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css">
                            <children>
                               <AnchorPane layoutX="12.0" layoutY="10.0" prefHeight="263.0" prefWidth="1110.0">
                                  <styleClass>
@@ -284,9 +284,9 @@
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/—Pngtree—white%20edit%20icon_4559214.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -298,7 +298,7 @@
                                        <graphic>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/trash-10-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -394,9 +394,9 @@
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/—Pngtree—white%20edit%20icon_4559214.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -408,7 +408,7 @@
                                        <graphic>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/trash-10-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -522,9 +522,9 @@
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/—Pngtree—white%20edit%20icon_4559214.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -551,7 +551,7 @@
                                        <graphic>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/trash-10-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -580,7 +580,7 @@
                               <String fx:value="white-bg" />
                            </styleClass>
                         </AnchorPane>
-                        <AnchorPane fx:id="Jury_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css">
+                        <AnchorPane fx:id="Jury_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css" visible="false">
                            <children>
                               <AnchorPane layoutX="12.0" layoutY="10.0" prefHeight="263.0" prefWidth="1110.0">
                                  <styleClass>
@@ -602,7 +602,7 @@
                                           <Font name="Tahoma Bold" size="26.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="boutonjury" layoutX="839.0" layoutY="14.0" mnemonicParsing="false" onAction="#AjouterJury" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Ajouter">
+                                    <Button fx:id="ajouter_jury" layoutX="839.0" layoutY="14.0" mnemonicParsing="false" onAction="#AjouterJury" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Ajouter">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -643,7 +643,7 @@
                                        <graphic>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/trash-10-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -653,9 +653,9 @@
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="42.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/—Pngtree—white%20edit%20icon_4559214.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -774,7 +774,7 @@
                                        <graphic>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/trash-10-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -784,9 +784,9 @@
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="37.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/—Pngtree—white%20edit%20icon_4559214.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
