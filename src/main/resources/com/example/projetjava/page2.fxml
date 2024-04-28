@@ -544,7 +544,7 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="supprimer_pfe" layoutX="852.0" layoutY="177.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
+                                    <Button fx:id="supprimer_pfe" layoutX="852.0" layoutY="177.0" mnemonicParsing="false" onAction="#SupprimerPFE" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>

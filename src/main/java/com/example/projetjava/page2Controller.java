@@ -596,7 +596,7 @@ public class page2Controller {
         }else{
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
-            alert.setHeaderText("Vous êtes sure de supprimer cet etudiant");
+            alert.setHeaderText("Etes-vous sûre de supprimer cet etudiant");
             alert.showAndWait().ifPresent(response->{
                 if (response == ButtonType.OK){
                     deleteData.deleteEnseignant(id);
@@ -738,14 +738,38 @@ public class page2Controller {
             alert.setHeaderText("Veuillez remplir les champs");
             alert.showAndWait();
         }else {
-            alert.setAlertType(Alert.AlertType.INFORMATION);
             updateData.updatePFE(new PFE(titre, encadrant, etudiant1, etudiant2));
             displayPFES();
             ResetPagePFE();
             fillComboBoxEncadrant();
             fillComboBoxEtudiant1();
             fillComboBoxEtudiant2();
+        }
+    }
+
+    public void SupprimerPFE(){
+        String id=PFE_titre.getText();
+        if(id.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir le champ de titre_pfe");
             alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Etes-vous sûre de supprimer ce PFE");
+            alert.showAndWait().ifPresent(response->{
+                if (response == ButtonType.OK){
+                    deleteData.deletePFE(id);
+                    displayPFES();
+                    ResetPagePFE();
+                    fillComboBoxEtudiant1();
+                    fillComboBoxEtudiant2();
+                    fillComboBoxEncadrant();
+                }
+            });
+
+
         }
     }
 
