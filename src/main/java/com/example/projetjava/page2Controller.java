@@ -2,12 +2,9 @@ package com.example.projetjava;
 
 import com.example.projetjava.DataClasses.*;
 
-import com.sun.jdi.StringReference;
 import javafx.collections.FXCollections;
 import com.example.projetjava.DataClasses.PFE;
 import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
@@ -16,14 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.event.ActionEvent;
-import org.w3c.dom.events.MouseEvent;
 
-import javax.management.StringValueExp;
-import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 
 public class page2Controller {
@@ -631,13 +623,6 @@ public class page2Controller {
 
     //PAGE PFE
 
-    public void ResetPagePFE(){
-        PFE_titre.setText("");
-        PFE_encadrant.setItems(FXCollections.observableArrayList());
-        PFE_etudiant1.setItems(FXCollections.observableArrayList());
-        PFE_etudiant2.setItems(FXCollections.observableArrayList());
-    }
-
     public void displayPFES() {
         PFES = getData.getPFE();
         try {
@@ -649,6 +634,13 @@ public class page2Controller {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void ResetPagePFE(){
+        PFE_titre.setText("");
+        PFE_encadrant.setItems(FXCollections.observableArrayList());
+        PFE_etudiant1.setItems(FXCollections.observableArrayList());
+        PFE_etudiant2.setItems(FXCollections.observableArrayList());
     }
 
     public void PFE_Clicked() {
@@ -776,6 +768,22 @@ public class page2Controller {
 
     // PAGE JURY
 
+    public void fillComboBoxTitre(){
+        Jury_titre.setItems(FXCollections.observableArrayList(getData.getJury_titre()));
+    }
+
+    public void fillComboBoxPresident(){
+        Jury_president.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    }
+
+    public void fillComboBoxExaminateur(){
+        Jury_examinateur.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    }
+
+    public void fillComboBoxRapporteur(){
+        Jury_rapporteur.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    }
+
     private ObservableList<Jury> Jurys;
     public void displayJurys() {
         Jurys = getData.getJury();
@@ -789,6 +797,25 @@ public class page2Controller {
             Jury_table_view.setItems(Jurys);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void ResetPageJury(){
+        Jury_titre.setItems(FXCollections.observableArrayList());
+        Jury_president.setItems(FXCollections.observableArrayList());
+        Jury_examinateur.setItems(FXCollections.observableArrayList());
+        Jury_rapporteur.setItems(FXCollections.observableArrayList());
+        Jury_invite.setText("");
+    }
+
+    public void Jury_Clicked() {
+        Jury jury_clicked = Jury_table_view.getSelectionModel().getSelectedItem();
+        if (jury_clicked != null) {
+            Jury_titre.setValue(String.valueOf(jury_clicked.getTitre_pfe()));
+            Jury_president.setValue(jury_clicked.getPresident());
+            Jury_examinateur.setValue(jury_clicked.getExaminateur());
+            Jury_rapporteur.setValue(jury_clicked.getRapporteur());
+            Jury_invite.setText(jury_clicked.getInvite());
         }
     }
 
@@ -837,26 +864,41 @@ public class page2Controller {
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setTitle("Ajout Jury");
             alert.setHeaderText("Ajout Jury effectué avec succès");
+            ResetPageJury();
+            fillComboBoxTitre();
+            fillComboBoxPresident();
+            fillComboBoxExaminateur();
+            fillComboBoxRapporteur();
             alert.showAndWait();
         }
 
     }
 
-    public void fillComboBoxTitre(){
-        Jury_titre.setItems(FXCollections.observableArrayList(getData.getJury_titre()));
+    public void ModifierJury(){
+        String titre = Jury_titre.getSelectionModel().getSelectedItem();
+        String president = Jury_president.getSelectionModel().getSelectedItem();
+        String examinateur = Jury_examinateur.getSelectionModel().getSelectedItem();
+        String rapporteur = Jury_rapporteur.getSelectionModel().getSelectedItem();
+        String invite = Jury_invite.getText();
+        String encadrant = getData.getJury_Encadrant(titre);
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(Jury_titre.getSelectionModel().isEmpty() || Jury_president.getSelectionModel().isEmpty() || Jury_examinateur.getSelectionModel().isEmpty() || Jury_examinateur.getSelectionModel().isEmpty() || invite.isEmpty()){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir les champs");
+            alert.showAndWait();
+        }else {
+            updateData.updateJury(new Jury(titre, president, rapporteur, examinateur, encadrant, invite));
+            displayJurys();
+            ResetPageJury();
+            fillComboBoxTitre();
+            fillComboBoxPresident();
+            fillComboBoxExaminateur();
+            fillComboBoxRapporteur();
+        }
     }
 
-    public void fillComboBoxPresident(){
-        Jury_president.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
-    }
 
-    public void fillComboBoxExaminateur(){
-        Jury_examinateur.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
-    }
-
-    public void fillComboBoxRapporteur(){
-        Jury_rapporteur.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
-    }
 
     //PAGE SOUTENANCE
     public void fillComboBoxTime(){

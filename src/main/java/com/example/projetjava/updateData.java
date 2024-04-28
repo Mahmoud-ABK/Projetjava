@@ -2,6 +2,7 @@ package com.example.projetjava;
 import com.example.projetjava.DataClasses.Enseignant;
 import com.example.projetjava.DataClasses.Etudiant;
 
+import com.example.projetjava.DataClasses.Jury;
 import com.example.projetjava.DataClasses.PFE;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -89,6 +90,37 @@ public class updateData {
                 preparedStatement.setString(2, pfe.getEtudiant1());
                 preparedStatement.setString(3, pfe.getEtudiant2());
                 preparedStatement.setString(4, pfe.getTitre_pfe());
+                preparedStatement.executeUpdate();
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setTitle("modification");
+                alert.setHeaderText("modification effectué avec succès");
+                alert.showAndWait();
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public static void updateJury(Jury jury) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(!getData.existePfeDansJury(jury.getTitre_pfe())){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Ce titre n'existe pas");
+            alert.showAndWait();
+        } else {
+            String sql = "update jury set president = ? , rapporteur = ?, examinateur = ? , encadrant = ? , invite = ? where titre_pfe = ?";
+            connection=database.connectDb();
+            try {
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, jury.getPresident());
+                preparedStatement.setString(2, jury.getRapporteur());
+                preparedStatement.setString(3, jury.getExaminateur());
+                preparedStatement.setString(4, jury.getEnseignant());
+                preparedStatement.setString(5, jury.getInvite());
+                preparedStatement.setString(6, jury.getTitre_pfe());
                 preparedStatement.executeUpdate();
                 alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setTitle("modification");
