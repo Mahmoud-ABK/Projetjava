@@ -1,6 +1,6 @@
 package com.example.projetjava;
 
-import com.example.projetjava.DataClasses.Enseignant;
+import com.example.projetjava.DataClasses.*;
 import com.example.projetjava.DataClasses.Etudiant;
 
 import com.example.projetjava.DataClasses.Jury;
@@ -188,6 +188,23 @@ public class getData {
 
         return listJury;
     }
+    public static ObservableList<soutenance> getSoutenance() {
+        ObservableList<soutenance> listSoutenance = FXCollections.observableArrayList();
+        String sql = "SELECT * FROM soutenance";
+        connection =database.connectDb();
+        try {
+            preparedStatement =connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            soutenance sout;
+            while (resultSet.next()) {
+                sout = new soutenance(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getFloat(5),resultSet.getString(6));
+                listSoutenance.add(sout);
+            }
+
+        }catch (Exception e){e.printStackTrace();
+        }
+        return listSoutenance;
+    }
 
     public static boolean existeDansEtudiants(String cin) {
         connection=database.connectDb();
@@ -223,7 +240,7 @@ public class getData {
         return false;
     }
 
-    public static boolean existePfeDansPFE(String titre) {
+    public static boolean existePfe(String titre) {
         connection=database.connectDb();
         String sql = "SELECT * FROM pfe ";
         try{
@@ -256,5 +273,39 @@ public class getData {
         }catch (Exception e){e.printStackTrace();}
         return false;
     }
+    public static boolean existePfedansSoutenance(String titre) {
+        connection=database.connectDb();
+        String sql = "SELECT * FROM soutenance ";
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                if(titre.equals(resultSet.getString(1))){
+                    return true;
+                }
+            }
+
+        }catch (Exception e){e.printStackTrace();}
+        return false;
+    }
+    public static ObservableList<String> getPFE_Titre() {
+        ObservableList<String> PFE_ID = FXCollections.observableArrayList();
+        String sql = "SELECT Titre_Pfe FROM pfe";
+        connection =database.connectDb();
+
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            resultSet = preparedStatement.executeQuery();
+            String pfe_id;
+            while (resultSet.next()) {
+                pfe_id = resultSet.getString(1);
+                PFE_ID.add(pfe_id);
+            }
+        }catch (Exception e){e.printStackTrace();}
+
+        return PFE_ID;
+    }
+
 }
 

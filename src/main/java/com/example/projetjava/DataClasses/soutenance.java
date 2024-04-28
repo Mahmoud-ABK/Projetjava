@@ -1,5 +1,7 @@
 package com.example.projetjava.DataClasses;
 
+import java.time.LocalDate;
+
 public class soutenance {
     String titre_pfe;
     String date;
@@ -62,5 +64,8 @@ public class soutenance {
 
     public void setValidite(String validite) {
         this.validite = validite;
+    }
+    public LocalDate getDateasDate(){
+        return LocalDate.parse(date);
     }
 }

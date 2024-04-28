@@ -389,7 +389,7 @@ public class page2Controller {
         displayEtudiants();
         alert.setAlertType(Alert.AlertType.INFORMATION);
         alert.setTitle("Ajout Etudiant");
-        alert.setHeaderText("Ajout Etudiant effectué avec succès");
+        alert.setHeaderText("Ajout Etudiant effectué avec succée");
         alert.showAndWait();
         ResetPageEtudiant();
         alert.showAndWait();
@@ -520,6 +520,8 @@ public class page2Controller {
     }
 
     //PAGE PFE
+
+
 
     public void displayPFES() {
         PFES = getData.getPFE();
@@ -692,6 +694,11 @@ public class page2Controller {
 
     }
 
+    public void fillComboBoxTitrepfeSoutenance(){
+
+        Soutenance_titrePFE.setItems(FXCollections.observableArrayList(getData.getPFE_Titre()));
+    }
+
     public void prepareSoutenance(){
         String titre_pfe=(String) Soutenance_titrePFE.getSelectionModel().getSelectedItem();
         LocalDate dateSoutenance ;
@@ -704,17 +711,35 @@ public class page2Controller {
             alert.setTitle("Erreur");
             alert.setHeaderText("Veuillez remplir Les Champs ");
             alert.showAndWait();
-        }else {
+        } else if (getData.existePfedansSoutenance(titre_pfe)) {
+         alert.setTitle("Erreur");
+         alert.setHeaderText("ce pfe deja a une soutenance");
+         alert.showAndWait();
+
+        } else {
             dateSoutenance=Soutenance_Date.getValue();
-            if ( LocalDate.now().isBefore(dateSoutenance) || !(note.isEmpty()) ) {
+            if ( LocalDate.now().isBefore(dateSoutenance) && !(note.isEmpty()) ) {
                 alert.setTitle("Erreur");
                 alert.setHeaderText("Tu ne peux pas mettre le note avant la date de soutenance");
                 alert.showAndWait();
 
             }else{
-                String valide= (Integer.getInteger(note)>10)?"Validee":"non validee";
+                soutenance sout;
+                String valide="";
+                if(note.isEmpty()){
+                   sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,0,valide);
+                }
+                else{
+                    valide= (Float.parseFloat(note)>10)?"Validee":"non validee";
+                    sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,Float.parseFloat(note),valide);
 
-                soutenance sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,Integer.getInteger(note),valide);
+                }
+                setData.addSoutenance(sout);
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setTitle("Ajout Soutenance");
+                alert.setHeaderText("Ajout Soutenance avec succee");
+                alert.showAndWait();
+
                 System.out.println(sout.toString());
             }
         }
@@ -786,10 +811,6 @@ public class page2Controller {
             Jury_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
             Pfe_btn.setStyle("-fx-background-color: transparent");
             Soutenance_btn.setStyle("-fx-background-color: transparent");
-            fillComboBoxTitre();
-            fillComboBoxPresident();
-            fillComboBoxExaminateur();
-            fillComboBoxRapporteur();
             displayJurys();
         }else if(event.getSource() == Pfe_btn) {
             //Transition
