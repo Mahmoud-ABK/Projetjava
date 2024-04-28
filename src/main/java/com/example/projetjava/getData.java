@@ -206,6 +206,23 @@ public class getData {
         return false;
     }
 
+    public static boolean existeDansEnseignants(String cin) {
+        connection=database.connectDb();
+        String sql = "SELECT * FROM enseignant ";
+        try{
+            preparedStatement=connection.prepareStatement(sql);
+            resultSet=preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                if(cin.equals(resultSet.getString(1))){
+                    return true;
+                }
+            }
+
+        }catch (Exception e){e.printStackTrace();}
+        return false;
+    }
+
     public static boolean existeEnseignant(String cin) {
         connection=database.connectDb();
         String sql = "SELECT * FROM enseignant ";

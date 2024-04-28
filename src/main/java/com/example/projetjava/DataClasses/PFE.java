@@ -13,7 +13,7 @@ public class PFE {
         this.enseignant = enseignant;
     }
 
-    public PFE(String titre_pfe, String etudiant1, String enseignant) {
+    public PFE(String titre_pfe, String enseignant, String etudiant1) {
         this.titre_pfe = titre_pfe;
         this.etudiant1 = etudiant1;
         this.enseignant = enseignant;

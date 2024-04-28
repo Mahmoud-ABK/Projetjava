@@ -315,7 +315,7 @@
                                     <URL value="@stylesheet2.css" />
                                  </stylesheets>
                                  <children>
-                                    <TableView fx:id="Etudiant_Table_View" layoutX="14.0" layoutY="76.0" prefHeight="352.0" prefWidth="1083.0">
+                                    <TableView fx:id="Etudiant_Table_View" layoutX="14.0" layoutY="76.0" onMouseClicked="#Etudiant_Clicked" prefHeight="352.0" prefWidth="1083.0">
                                        <columns>
                                           <TableColumn fx:id="Etudiant_col_ID" minWidth="-Infinity" prefWidth="216.6" text="ID" />
                                           <TableColumn fx:id="Etudiant_col_nom" minWidth="0.0" prefWidth="216.6" text="Nom" />
@@ -389,7 +389,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="modifier_enseignant" layoutX="857.0" layoutY="94.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Modifier">
+                                    <Button fx:id="modifier_enseignant" layoutX="857.0" layoutY="94.0" mnemonicParsing="false" onAction="#ModifierEnseignant" prefHeight="76.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Modifier">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -401,7 +401,7 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="supprimer_enseignant" layoutX="857.0" layoutY="176.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
+                                    <Button fx:id="supprimer_enseignant" layoutX="857.0" layoutY="176.0" mnemonicParsing="false" onAction="#SupprimerEnseignant" prefHeight="76.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -437,7 +437,7 @@
                                     <URL value="@stylesheet2.css" />
                                  </stylesheets>
                                  <children>
-                                    <TableView fx:id="Enseignant_Table_View" layoutX="14.0" layoutY="76.0" prefHeight="352.0" prefWidth="1083.0">
+                                    <TableView fx:id="Enseignant_Table_View" layoutX="14.0" layoutY="76.0" onMouseClicked="#Enseignant_Clicked" prefHeight="352.0" prefWidth="1083.0">
                                       <columns>
                                         <TableColumn fx:id="Enseignant_col_ID" minWidth="-Infinity" prefWidth="216.6" text="ID" />
                                         <TableColumn fx:id="Enseignant_col_nom" minWidth="0.0" prefWidth="216.6" text="Nom" />
@@ -447,7 +447,7 @@
                                           <TableColumn fx:id="Enseignant_col_position" prefWidth="216.6" text="Position" />
                                       </columns>
                                     </TableView>
-                                    <TextField layoutX="14.0" layoutY="17.0" prefHeight="40.0" prefWidth="277.0" promptText="RECHERCHE">
+                                    <TextField fx:id="Enseignant_recherche" layoutX="14.0" layoutY="17.0" onAction="#rechercheEnseignant" prefHeight="40.0" prefWidth="277.0" promptText="RECHERCHE">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -465,7 +465,7 @@
                               <String fx:value="white-bg" />
                            </styleClass>
                         </AnchorPane>
-                        <AnchorPane fx:id="Pfe_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css" visible="false">
+                        <AnchorPane fx:id="Pfe_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css">
                            <children>
                               <AnchorPane layoutX="12.0" layoutY="286.0" prefHeight="440.0" prefWidth="1110.0">
                                  <styleClass>
@@ -477,7 +477,7 @@
                                     <URL value="@stylesheet2.css" />
                                  </stylesheets>
                                  <children>
-                                    <TableView fx:id="PFE_table_view" layoutX="14.0" layoutY="76.0" prefHeight="352.0" prefWidth="1083.0">
+                                    <TableView fx:id="PFE_table_view" layoutX="14.0" layoutY="76.0" onMouseClicked="#PFE_Clicked" prefHeight="352.0" prefWidth="1083.0">
                                        <columns>
                                           <TableColumn fx:id="PFE_col_titre" minWidth="0.0" prefWidth="350.0" text="Titre de PFE" />
                                           <TableColumn fx:id="PFE_col_encadrant" prefWidth="246.0" text="ID encadrant" />
@@ -517,7 +517,7 @@
                                           <Font name="Tahoma Bold" size="26.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="modifier_pfe" layoutX="852.0" layoutY="98.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Modifier">
+                                    <Button fx:id="modifier_pfe" layoutX="852.0" layoutY="98.0" mnemonicParsing="false" onAction="#ModifierPFE" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Modifier">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -580,7 +580,7 @@
                               <String fx:value="white-bg" />
                            </styleClass>
                         </AnchorPane>
-                        <AnchorPane fx:id="Jury_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css">
+                        <AnchorPane fx:id="Jury_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css" visible="false">
                            <children>
                               <AnchorPane layoutX="12.0" layoutY="10.0" prefHeight="263.0" prefWidth="1110.0">
                                  <styleClass>
