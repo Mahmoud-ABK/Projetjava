@@ -220,7 +220,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="Etudiant_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css" visible="false">
+                        <AnchorPane fx:id="Etudiant_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css">
                            <children>
                               <AnchorPane layoutX="12.0" layoutY="10.0" prefHeight="263.0" prefWidth="1110.0">
                                  <styleClass>
@@ -284,9 +284,9 @@
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="39.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/—Pngtree—white%20edit%20icon_4559214.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -298,7 +298,7 @@
                                        <graphic>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/trash-10-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -315,7 +315,7 @@
                                     <URL value="@stylesheet2.css" />
                                  </stylesheets>
                                  <children>
-                                    <TableView fx:id="Etudiant_Table_View" layoutX="14.0" layoutY="76.0" prefHeight="352.0" prefWidth="1083.0">
+                                    <TableView fx:id="Etudiant_Table_View" layoutX="14.0" layoutY="76.0" onMouseClicked="#Etudiant_Clicked" prefHeight="352.0" prefWidth="1083.0">
                                        <columns>
                                           <TableColumn fx:id="Etudiant_col_ID" minWidth="-Infinity" prefWidth="216.6" text="ID" />
                                           <TableColumn fx:id="Etudiant_col_nom" minWidth="0.0" prefWidth="216.6" text="Nom" />
@@ -389,26 +389,26 @@
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="modifier_enseignant" layoutX="857.0" layoutY="94.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Modifier">
+                                    <Button fx:id="modifier_enseignant" layoutX="857.0" layoutY="94.0" mnemonicParsing="false" onAction="#ModifierEnseignant" prefHeight="76.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Modifier">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/—Pngtree—white%20edit%20icon_4559214.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="supprimer_enseignant" layoutX="857.0" layoutY="176.0" mnemonicParsing="false" prefHeight="76.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
+                                    <Button fx:id="supprimer_enseignant" layoutX="857.0" layoutY="176.0" mnemonicParsing="false" onAction="#SupprimerEnseignant" prefHeight="76.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/trash-10-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -437,7 +437,7 @@
                                     <URL value="@stylesheet2.css" />
                                  </stylesheets>
                                  <children>
-                                    <TableView fx:id="Enseignant_Table_View" layoutX="14.0" layoutY="76.0" prefHeight="352.0" prefWidth="1083.0">
+                                    <TableView fx:id="Enseignant_Table_View" layoutX="14.0" layoutY="76.0" onMouseClicked="#Enseignant_Clicked" prefHeight="352.0" prefWidth="1083.0">
                                       <columns>
                                         <TableColumn fx:id="Enseignant_col_ID" minWidth="-Infinity" prefWidth="216.6" text="ID" />
                                         <TableColumn fx:id="Enseignant_col_nom" minWidth="0.0" prefWidth="216.6" text="Nom" />
@@ -447,7 +447,7 @@
                                           <TableColumn fx:id="Enseignant_col_position" prefWidth="216.6" text="Position" />
                                       </columns>
                                     </TableView>
-                                    <TextField layoutX="14.0" layoutY="17.0" prefHeight="40.0" prefWidth="277.0" promptText="RECHERCHE">
+                                    <TextField fx:id="Enseignant_recherche" layoutX="14.0" layoutY="17.0" onAction="#rechercheEnseignant" prefHeight="40.0" prefWidth="277.0" promptText="RECHERCHE">
                                        <font>
                                           <Font size="24.0" />
                                        </font>
@@ -477,7 +477,7 @@
                                     <URL value="@stylesheet2.css" />
                                  </stylesheets>
                                  <children>
-                                    <TableView fx:id="PFE_table_view" layoutX="14.0" layoutY="76.0" prefHeight="352.0" prefWidth="1083.0">
+                                    <TableView fx:id="PFE_table_view" layoutX="14.0" layoutY="76.0" onMouseClicked="#PFE_Clicked" prefHeight="352.0" prefWidth="1083.0">
                                        <columns>
                                           <TableColumn fx:id="PFE_col_titre" minWidth="0.0" prefWidth="350.0" text="Titre de PFE" />
                                           <TableColumn fx:id="PFE_col_encadrant" prefWidth="246.0" text="ID encadrant" />
@@ -517,14 +517,14 @@
                                           <Font name="Tahoma Bold" size="26.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="modifier_pfe" layoutX="852.0" layoutY="98.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Modifier">
+                                    <Button fx:id="modifier_pfe" layoutX="852.0" layoutY="98.0" mnemonicParsing="false" onAction="#ModifierPFE" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Modifier">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="42.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/—Pngtree—white%20edit%20icon_4559214.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -544,14 +544,14 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="supprimer_pfe" layoutX="852.0" layoutY="177.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
+                                    <Button fx:id="supprimer_pfe" layoutX="852.0" layoutY="177.0" mnemonicParsing="false" onAction="#SupprimerPFE" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/trash-10-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -580,7 +580,7 @@
                               <String fx:value="white-bg" />
                            </styleClass>
                         </AnchorPane>
-                        <AnchorPane fx:id="Jury_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css">
+                        <AnchorPane fx:id="Jury_form" layoutX="60.0" layoutY="20.0" prefHeight="737.0" prefWidth="1135.0" stylesheets="@stylesheet2.css" visible="false">
                            <children>
                               <AnchorPane layoutX="12.0" layoutY="10.0" prefHeight="263.0" prefWidth="1110.0">
                                  <styleClass>
@@ -602,7 +602,7 @@
                                           <Font name="Tahoma Bold" size="26.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="boutonjury" layoutX="839.0" layoutY="14.0" mnemonicParsing="false" onAction="#AjouterJury" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Ajouter">
+                                    <Button fx:id="ajouter_jury" layoutX="839.0" layoutY="14.0" mnemonicParsing="false" onAction="#AjouterJury" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Ajouter">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
@@ -636,26 +636,26 @@
                                        </font>
                                     </Label>
                                     <TextField fx:id="Jury_invite" layoutX="564.0" layoutY="178.0" prefHeight="30.0" prefWidth="190.0" />
-                                    <Button fx:id="supprimer_jury" layoutX="839.0" layoutY="185.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
+                                    <Button fx:id="supprimer_jury" layoutX="839.0" layoutY="185.0" mnemonicParsing="false" onAction="#SupprimerJury" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Supprimer">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/trash-10-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
                                     </Button>
-                                    <Button fx:id="modifier_jury" layoutX="839.0" layoutY="98.0" mnemonicParsing="false" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Modifier">
+                                    <Button fx:id="modifier_jury" layoutX="839.0" layoutY="98.0" mnemonicParsing="false" onAction="#ModifierJury" prefHeight="66.0" prefWidth="215.0" stylesheets="@stylesheet2.css" text="Modifier">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="42.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/—Pngtree—white%20edit%20icon_4559214.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -675,7 +675,7 @@
                                     <URL value="@stylesheet2.css" />
                                  </stylesheets>
                                  <children>
-                                    <TableView fx:id="Jury_table_view" layoutX="14.0" layoutY="76.0" prefHeight="352.0" prefWidth="1083.0" stylesheets="@stylesheet2.css">
+                                    <TableView fx:id="Jury_table_view" layoutX="14.0" layoutY="76.0" onMouseClicked="#Jury_Clicked" prefHeight="352.0" prefWidth="1083.0" stylesheets="@stylesheet2.css">
                                        <columns>
                                           <TableColumn fx:id="Jury_col_titre" minWidth="-Infinity" prefWidth="180.5" text="Titre de PFE" />
                                           <TableColumn fx:id="Jury_col_president" minWidth="0.0" prefWidth="180.5" text="Président" />
@@ -768,7 +768,7 @@
                                        <graphic>
                                           <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/trash-10-32.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>
@@ -778,9 +778,9 @@
                                           <Font name="System Bold" size="21.0" />
                                        </font>
                                        <graphic>
-                                          <ImageView fitHeight="32.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                          <ImageView fitHeight="37.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@Images/add_white_button_icon_227863.png" />
+                                                <Image url="@Images/—Pngtree—white%20edit%20icon_4559214.png" />
                                              </image>
                                           </ImageView>
                                        </graphic>

@@ -6,20 +6,32 @@
 
 #welcome {
     -fx-background-color: linear-gradient(to bottom, #458BE3, #3579BD);
-    -fx-background-radius: 10px; /* Rounded corners for a softer look */
-    -fx-border-color: #3579BD; /* Slightly darker border for definition */
+    -fx-background-radius: 10px;
+    -fx-border-color: #3579BD;
     -fx-border-width: 2px;
     -fx-border-radius: 10px;
-    -fx-text-fill: #FFFFFF; /* White text for contrast */
-    -fx-padding: 10px 20px; /* Generous padding for comfort */
-    -fx-cursor: hand; /* Standard hand cursor on hover */
-    -fx-transition: background-color 0.2s cubic-bezier(0.25, 0.1, 0.25, 1.0);
-    -fx-hover-base: #3579BD;
+    -fx-text-fill: #FFFFFF;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, #000000, 5, 0.5, 2, 2); /* Darker and more pronounced shadow */
+    -fx-transition: background-color 0.05s ease-in-out; /* Transition duration for background color */
+}
 
-    -fx-text-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 1, 1, 1, 1);
-}
-#welcome:hover{
+#welcome:hover {
     -fx-background-color: #0F50A2;
+    -fx-effect: dropshadow(gaussian, #000000, 8, 0.8, 2, 2); /* Change shadow effect on hover */
+    -fx-transition: background-color 0.02s ease-in-out; /* Transition duration for background color on hover */
 }
+
+/* Additional styling for the default state */
+#welcome:pressed {
+    -fx-background-color: #3579BD;
+    -fx-border-color: #3579BD;
+    -fx-effect: dropshadow(gaussian, #000000, 3, 0.3, 1, 1); /* Lighter shadow when pressed */
+}
+
+
+
+
 
 

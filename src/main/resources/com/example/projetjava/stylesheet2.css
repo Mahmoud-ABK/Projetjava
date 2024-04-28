@@ -121,3 +121,17 @@
 #planification{
     -fx-text-fill : #ac156e;
 }
+
+#ajouter_etudiant:hover,
+#modifier_etudiant:hover,
+#ajouter_enseignant:hover,
+#modifier_enseignant:hover,
+#ajouter_pfe:hover,
+#modifier_pfe:hover,
+#ajouter_jury:hover,
+#modifier_jury:hover,
+#ajouter_soutenance:hover,
+#modifier_soutenance:hover,
+#supprimer_etudiant:hover, #supprimer_enseignant:hover, #supprimer_pfe:hover, #supprimer_jury:hover, #supprimer_soutenance:hover{
+    -fx-background-color: #7e0e4d
+}

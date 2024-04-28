@@ -14,11 +14,8 @@ import javafx.scene.layout.AnchorPane;
 
 import javafx.event.ActionEvent;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 
 public class page2Controller {
@@ -61,6 +58,9 @@ public class page2Controller {
 
     @FXML
     private TextField Enseignant_email;
+
+    @FXML
+    private TextField Enseignant_recherche;
 
     @FXML
     private ComboBox<String> Enseignant_position;
@@ -353,9 +353,20 @@ public class page2Controller {
         Etudiant_col_prenom.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("prenom"));
         Etudiant_col_email.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("email"));
         Etudiant_col_filiere.setCellValueFactory(new PropertyValueFactory<Etudiant, String>("filiere"));
-        Etudiant_Table_View.setItems(Etudiants);}
-        catch(Exception e){
+        Etudiant_Table_View.setItems(Etudiants);
+        } catch(Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public void Etudiant_Clicked() {
+        Etudiant etudiant_clicked = Etudiant_Table_View.getSelectionModel().getSelectedItem();
+        if (etudiant_clicked != null) {
+            Etudiant_ID.setText(String.valueOf(etudiant_clicked.getCin()));
+            Etudiant_prenom.setText(String.valueOf(etudiant_clicked.getPrenom()));
+            Etudiant_nom.setText(String.valueOf(etudiant_clicked.getNom()));
+            Etudiant_Email.setText(String.valueOf(etudiant_clicked.getEmail()));
+            Etudiant_filiere.setValue(etudiant_clicked.getFiliere());
         }
     }
 
@@ -392,7 +403,8 @@ public class page2Controller {
         alert.setHeaderText("Ajout Etudiant effectué avec succée");
         alert.showAndWait();
         ResetPageEtudiant();
-        alert.showAndWait();
+        fillComboBoxFiliere();
+        //setSearchEtudiant();
         }
 
     }
@@ -414,6 +426,8 @@ public class page2Controller {
             updateData.updateEtudiants(new Etudiant(id,nom,prenom,email,filiere));
             displayEtudiants();
             ResetPageEtudiant();
+            fillComboBoxFiliere();
+            //setSearchEtudiant();
 
         }
 
@@ -429,12 +443,13 @@ public class page2Controller {
         }else{
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation");
-            alert.setHeaderText("Vous êtes sur de supprimer cet etudiant");
+            alert.setHeaderText("Êtes-vous sûre de supprimer cet etudiant");
             alert.showAndWait().ifPresent(response->{
                 if (response == ButtonType.OK){
                     deleteData.deleteEtudiant(id);
                     displayEtudiants();
                     ResetPageEtudiant();
+                    //setSearchEtudiant();
                 }
             });
 
@@ -463,6 +478,14 @@ public class page2Controller {
 
     //PAGE ENSEIGNANT
 
+    public void ResetPageEnseignant(){
+        Enseignant_ID.setText("");
+        Enseignant_nom.setText("");
+        Enseignant_prenom.setText("");
+        Enseignant_email.setText("");
+        Enseignant_position.setItems(FXCollections.observableArrayList());
+    }
+
     private ObservableList<Enseignant> Enseignants;
     public void displayEnseignant() {
         Enseignants = getData.getEnseignant();
@@ -481,6 +504,17 @@ public class page2Controller {
     public void fillComboBoxPosition(){
         String[] position={"Assistant","Maitre assistant","Maître de conférences","Professeur de l'enseignement supérieur"};
         Enseignant_position.setItems(FXCollections.observableArrayList(position));
+    }
+
+    public void Enseignant_Clicked() {
+        Enseignant enseignant_clicked = Enseignant_Table_View.getSelectionModel().getSelectedItem();
+        if (enseignant_clicked != null) {
+            Enseignant_ID.setText(String.valueOf(enseignant_clicked.getCin()));
+            Enseignant_prenom.setText(String.valueOf(enseignant_clicked.getPrenom()));
+            Enseignant_nom.setText(String.valueOf(enseignant_clicked.getNom()));
+            Enseignant_email.setText(String.valueOf(enseignant_clicked.getEmail()));
+            Enseignant_position.setValue(enseignant_clicked.getPosition());
+        }
     }
 
     public void AjouterEnseignant(){
@@ -514,9 +548,76 @@ public class page2Controller {
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setTitle("Ajout Enseignant");
             alert.setHeaderText("Ajout Enseignant effectué avec succès");
+            ResetPageEnseignant();
+            fillComboBoxPosition();
             alert.showAndWait();
         }
 
+    }
+
+    public void ModifierEnseignant(){
+        String id=Enseignant_ID.getText();
+        String nom=Enseignant_nom.getText();
+        String prenom=Enseignant_prenom.getText();
+        String email=Enseignant_email.getText();
+        String position=(String)Enseignant_position.getSelectionModel().getSelectedItem();
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(id.isEmpty() || nom.isEmpty() || prenom.isEmpty() || email.isEmpty() || Enseignant_position.getSelectionModel().isEmpty()){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir les champs");
+            alert.showAndWait();
+        }else {
+            updateData.updateEnseignant(new Enseignant(id,nom,prenom,email,position));
+            displayEnseignant();
+            ResetPageEnseignant();
+            fillComboBoxPosition();
+
+        }
+
+    }
+
+    public void SupprimerEnseignant(){
+        String id=Enseignant_ID.getText();
+        if(id.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur!");
+            alert.setHeaderText("Veuillez remplir le champ de Cin!");
+            alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation!");
+            alert.setHeaderText("Etes-vous sûre de supprimer cet enseignant?");
+            alert.showAndWait().ifPresent(response->{
+                if (response == ButtonType.OK){
+                    deleteData.deleteEnseignant(id);
+                    displayEnseignant();
+                    ResetPageEnseignant();
+                    fillComboBoxPosition();
+                }
+            });
+
+
+        }
+    }
+
+    public void rechercheEnseignant(){
+        String data=Enseignant_recherche.getText();
+        if(data.isEmpty()){
+            displayEnseignant();
+        }else {
+            try{
+                Enseignant_col_ID.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("cin"));
+                Enseignant_col_nom.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("nom"));
+                Enseignant_col_prenom.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("prenom"));
+                Enseignant_col_email.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("email"));
+                Enseignant_col_position.setCellValueFactory(new PropertyValueFactory<Enseignant, String>("position"));
+                Enseignant_Table_View.setItems(queryData.getQueryEnseignants(data));}
+            catch(Exception e){
+                e.printStackTrace();
+            }
+
+        }
     }
 
     //PAGE PFE
@@ -533,6 +634,23 @@ public class page2Controller {
             PFE_table_view.setItems(PFES);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void ResetPagePFE(){
+        PFE_titre.setText("");
+        PFE_encadrant.setItems(FXCollections.observableArrayList());
+        PFE_etudiant1.setItems(FXCollections.observableArrayList());
+        PFE_etudiant2.setItems(FXCollections.observableArrayList());
+    }
+
+    public void PFE_Clicked() {
+        PFE pfe_clicked = PFE_table_view.getSelectionModel().getSelectedItem();
+        if (pfe_clicked != null) {
+            PFE_titre.setText(String.valueOf(pfe_clicked.getTitre_pfe()));
+            PFE_encadrant.setValue(pfe_clicked.getEnseignant());
+            PFE_etudiant1.setValue(pfe_clicked.getEtudiant1());
+            PFE_etudiant2.setValue(pfe_clicked.getEtudiant2());
         }
     }
 
@@ -554,7 +672,7 @@ public class page2Controller {
         String etudiant1 = (String)PFE_etudiant1.getSelectionModel().getSelectedItem();
         String etudiant2 = (String)PFE_etudiant2.getSelectionModel().getSelectedItem();
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        if(titre.isEmpty()||PFE_encadrant.getSelectionModel().isEmpty()||PFE_etudiant1.getSelectionModel().isEmpty()||PFE_etudiant2.getSelectionModel().isEmpty()){
+        if(titre.isEmpty()||PFE_encadrant.getSelectionModel().isEmpty()||PFE_etudiant1.getSelectionModel().isEmpty()){
 
             alert.setTitle("Erreur");
             alert.setHeaderText("Veuillez remplir les champs");
@@ -572,19 +690,100 @@ public class page2Controller {
             alert.showAndWait();
 
         } else{
-            PFE pfe = new PFE(PFE_titre.getText(),(String)PFE_encadrant.getSelectionModel().getSelectedItem(),(String)PFE_etudiant1.getSelectionModel().getSelectedItem(),(String)PFE_etudiant2.getSelectionModel().getSelectedItem());
-            setData.addPFE(pfe);
-            displayPFES();
-            alert.setAlertType(Alert.AlertType.INFORMATION);
-            alert.setTitle("Ajout Enseignant");
-            alert.setHeaderText("Ajout Enseignant effectué avec succès");
-            alert.showAndWait();
-        }
+            if(PFE_etudiant2.getSelectionModel().isEmpty()){
+                PFE pfe = new PFE(PFE_titre.getText(),(String)PFE_encadrant.getSelectionModel().getSelectedItem(),(String)PFE_etudiant1.getSelectionModel().getSelectedItem(), "");
+                setData.addPFE(pfe);
+                displayPFES();
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setTitle("Ajout Enseignant");
+                alert.setHeaderText("Ajout Enseignant effectué avec succès");
+                ResetPagePFE();
+                fillComboBoxEtudiant1();
+                fillComboBoxEncadrant();
+                fillComboBoxEtudiant2();
+                alert.showAndWait();
+            } else{
+                PFE pfe = new PFE(PFE_titre.getText(),(String)PFE_encadrant.getSelectionModel().getSelectedItem(),(String)PFE_etudiant1.getSelectionModel().getSelectedItem(),(String)PFE_etudiant2.getSelectionModel().getSelectedItem());
+                setData.addPFE(pfe);
+                displayPFES();
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setTitle("Ajout Enseignant");
+                alert.setHeaderText("Ajout Enseignant effectué avec succès");
+                ResetPagePFE();
+                fillComboBoxEtudiant1();
+                fillComboBoxEncadrant();
+                fillComboBoxEtudiant2();
+                alert.showAndWait();
+            }
 
+        }
+    }
+
+    public void ModifierPFE(){
+        String titre=PFE_titre.getText();
+        String etudiant1=PFE_etudiant1.getSelectionModel().getSelectedItem();
+        String etudiant2=PFE_etudiant2.getSelectionModel().getSelectedItem();
+        String encadrant=PFE_encadrant.getSelectionModel().getSelectedItem();
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(titre.isEmpty() || PFE_etudiant1.getSelectionModel().isEmpty() || PFE_etudiant2.getSelectionModel().isEmpty() || PFE_encadrant.getSelectionModel().isEmpty()){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir les champs");
+            alert.showAndWait();
+        }else {
+            updateData.updatePFE(new PFE(titre, encadrant, etudiant1, etudiant2));
+            displayPFES();
+            ResetPagePFE();
+            fillComboBoxEncadrant();
+            fillComboBoxEtudiant1();
+            fillComboBoxEtudiant2();
+        }
+    }
+
+    public void SupprimerPFE(){
+        String id=PFE_titre.getText();
+        if(id.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir le champ de titre_pfe");
+            alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Etes-vous sûre de supprimer ce PFE");
+            alert.showAndWait().ifPresent(response->{
+                if (response == ButtonType.OK){
+                    deleteData.deletePFE(id);
+                    displayPFES();
+                    ResetPagePFE();
+                    fillComboBoxEtudiant1();
+                    fillComboBoxEtudiant2();
+                    fillComboBoxEncadrant();
+                }
+            });
+
+
+        }
     }
 
 
     // PAGE JURY
+
+    public void fillComboBoxTitre(){
+        Jury_titre.setItems(FXCollections.observableArrayList(getData.getJury_titre()));
+    }
+
+    public void fillComboBoxPresident(){
+        Jury_president.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    }
+
+    public void fillComboBoxExaminateur(){
+        Jury_examinateur.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    }
+
+    public void fillComboBoxRapporteur(){
+        Jury_rapporteur.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    }
 
     private ObservableList<Jury> Jurys;
     public void displayJurys() {
@@ -599,6 +798,25 @@ public class page2Controller {
             Jury_table_view.setItems(Jurys);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void ResetPageJury(){
+        Jury_titre.setItems(FXCollections.observableArrayList());
+        Jury_president.setItems(FXCollections.observableArrayList());
+        Jury_examinateur.setItems(FXCollections.observableArrayList());
+        Jury_rapporteur.setItems(FXCollections.observableArrayList());
+        Jury_invite.setText("");
+    }
+
+    public void Jury_Clicked() {
+        Jury jury_clicked = Jury_table_view.getSelectionModel().getSelectedItem();
+        if (jury_clicked != null) {
+            Jury_titre.setValue(String.valueOf(jury_clicked.getTitre_pfe()));
+            Jury_president.setValue(jury_clicked.getPresident());
+            Jury_examinateur.setValue(jury_clicked.getExaminateur());
+            Jury_rapporteur.setValue(jury_clicked.getRapporteur());
+            Jury_invite.setText(jury_clicked.getInvite());
         }
     }
 
@@ -647,26 +865,67 @@ public class page2Controller {
             alert.setAlertType(Alert.AlertType.INFORMATION);
             alert.setTitle("Ajout Jury");
             alert.setHeaderText("Ajout Jury effectué avec succès");
+            ResetPageJury();
+            fillComboBoxTitre();
+            fillComboBoxPresident();
+            fillComboBoxExaminateur();
+            fillComboBoxRapporteur();
             alert.showAndWait();
         }
 
     }
 
-    public void fillComboBoxTitre(){
-        Jury_titre.setItems(FXCollections.observableArrayList(getData.getJury_titre()));
+    public void ModifierJury(){
+        String titre = Jury_titre.getSelectionModel().getSelectedItem();
+        String president = Jury_president.getSelectionModel().getSelectedItem();
+        String examinateur = Jury_examinateur.getSelectionModel().getSelectedItem();
+        String rapporteur = Jury_rapporteur.getSelectionModel().getSelectedItem();
+        String invite = Jury_invite.getText();
+        String encadrant = getData.getJury_Encadrant(titre);
+
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if(Jury_titre.getSelectionModel().isEmpty() || Jury_president.getSelectionModel().isEmpty() || Jury_examinateur.getSelectionModel().isEmpty() || Jury_examinateur.getSelectionModel().isEmpty() || invite.isEmpty()){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir les champs");
+            alert.showAndWait();
+        }else {
+            updateData.updateJury(new Jury(titre, president, rapporteur, examinateur, encadrant, invite));
+            displayJurys();
+            ResetPageJury();
+            fillComboBoxTitre();
+            fillComboBoxPresident();
+            fillComboBoxExaminateur();
+            fillComboBoxRapporteur();
+        }
     }
 
-    public void fillComboBoxPresident(){
-        Jury_president.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
+    public void SupprimerJury(){
+        String id=Jury_titre.getSelectionModel().getSelectedItem();
+        if(id.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir le Titre de pfe");
+            alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Etes-vous sûre de supprimer ce Jury");
+            alert.showAndWait().ifPresent(response->{
+                if (response == ButtonType.OK){
+                    deleteData.deleteJury(id);
+                    displayJurys();
+                    ResetPageJury();
+                    fillComboBoxTitre();
+                    fillComboBoxPresident();
+                    fillComboBoxRapporteur();
+                    fillComboBoxExaminateur();
+                }
+            });
+
+
+        }
     }
 
-    public void fillComboBoxExaminateur(){
-        Jury_examinateur.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
-    }
-
-    public void fillComboBoxRapporteur(){
-        Jury_rapporteur.setItems(FXCollections.observableArrayList(getData.getEnseignant_ID()));
-    }
 
     //PAGE SOUTENANCE
     public void fillComboBoxTime(){
@@ -846,9 +1105,40 @@ public class page2Controller {
             Soutenance_btn.setStyle("-fx-background-color: linear-gradient(to bottom right, #0F50A2, #A4D8FF)");
             fillComboBoxTime();
         }
-
-
     }
+
+    /*public void SearchEtudiant(){
+        ObservableList<Etudiant> datalist = getData.getEtudiants();
+        FilteredList<Etudiant> filteredList = new FilteredList<>(datalist, e -> true);
+        Etudiant_recherche.setOnKeyReleased(e -> {
+            Etudiant_recherche.textProperty().addListener((observable, oldValue, newValue) -> {
+                filteredList.setPredicate(etudiant -> {
+                    if (newValue == null || newValue.isEmpty()) {
+                                return true;
+                            }
+                    String lowerCaseFilter = newValue.toLowerCase();
+                    if (etudiant.getCin().contains(lowerCaseFilter)){
+                        return true;
+                    } else if (etudiant.getNom().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    } else if (etudiant.getPrenom().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    } else if (etudiant.getEmail().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    } else if (etudiant.getFiliere().toLowerCase().contains(lowerCaseFilter)){
+                        return true;
+                    } else{
+                        return false;
+                    }
+                });
+            });
+                SortedList<Etudiant> sortedList = new SortedList<>(filteredList);
+                sortedList.comparatorProperty().bind(Etudiant_Table_View.comparatorProperty());
+                Etudiant_Table_View.setItems(sortedList);
+            });
+    }*/
+
+
     public void initialize() {
         displayEtudiants();
     }
