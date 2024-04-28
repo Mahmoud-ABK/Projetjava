@@ -404,7 +404,6 @@ public class page2Controller {
         alert.showAndWait();
         ResetPageEtudiant();
         fillComboBoxFiliere();
-        alert.showAndWait();
         //setSearchEtudiant();
         }
 
@@ -582,13 +581,13 @@ public class page2Controller {
         String id=Enseignant_ID.getText();
         if(id.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erreur");
-            alert.setHeaderText("Veuillez remplir le champ de Cin");
+            alert.setTitle("Erreur!");
+            alert.setHeaderText("Veuillez remplir le champ de Cin!");
             alert.showAndWait();
         }else{
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation");
-            alert.setHeaderText("Etes-vous sûre de supprimer cet etudiant");
+            alert.setTitle("Confirmation!");
+            alert.setHeaderText("Etes-vous sûre de supprimer cet enseignant?");
             alert.showAndWait().ifPresent(response->{
                 if (response == ButtonType.OK){
                     deleteData.deleteEnseignant(id);
@@ -898,6 +897,32 @@ public class page2Controller {
         }
     }
 
+    public void SupprimerJury(){
+        String id=Jury_titre.getSelectionModel().getSelectedItem();
+        if(id.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir le Titre de pfe");
+            alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Etes-vous sûre de supprimer ce Jury");
+            alert.showAndWait().ifPresent(response->{
+                if (response == ButtonType.OK){
+                    deleteData.deleteJury(id);
+                    displayJurys();
+                    ResetPageJury();
+                    fillComboBoxTitre();
+                    fillComboBoxPresident();
+                    fillComboBoxRapporteur();
+                    fillComboBoxExaminateur();
+                }
+            });
+
+
+        }
+    }
 
 
     //PAGE SOUTENANCE

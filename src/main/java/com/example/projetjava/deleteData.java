@@ -87,4 +87,29 @@ public class deleteData {
 
         }
     }
+
+    public static void deleteJury(String titre) {
+        if (getData.existePfeDansJury(titre)==false) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Titre inexistant");
+            alert.showAndWait();
+        }else {
+            String sql = "DELETE FROM jury WHERE titre_pfe = ?";
+            connection=database.connectDb();
+            try{
+                preparedStatement=connection.prepareStatement(sql);
+                preparedStatement.setString(1, titre);
+                preparedStatement.executeUpdate();
+                Alert alert1 = new Alert(Alert.AlertType.INFORMATION);
+                alert1.setTitle("Confirmation");
+                alert1.setHeaderText("Jury supprimé avec succès");
+                alert1.showAndWait();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+    }
+
 }
