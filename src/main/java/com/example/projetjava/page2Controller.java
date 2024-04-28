@@ -652,6 +652,7 @@ public class page2Controller {
                 alert.setAlertType(Alert.AlertType.INFORMATION);
                 alert.setTitle("Ajout Soutenance");
                 alert.setHeaderText("Ajout Soutenance avec succee");
+                alert.showAndWait();
 
                 System.out.println(sout.toString());
             }
