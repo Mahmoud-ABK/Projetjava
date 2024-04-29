@@ -133,7 +133,7 @@ public class updateData {
     }
     public static void updateSoutenance(soutenance s) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        if(!getData.existePfeDansJury(s.getTitre_pfe())){
+        if(!getData.existePfedansSoutenance(s.getTitre_pfe())){
             alert.setTitle("Erreur");
             alert.setHeaderText("Ce titre n'existe pas");
             alert.showAndWait();

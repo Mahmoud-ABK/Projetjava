@@ -329,6 +329,13 @@ public class page2Controller {
     @FXML
     private ImageView searchEtudiant;
 
+    @FXML
+    private TextField PFE_recherche;
+
+    @FXML
+    private TextField jury_recherche;
+
+
     // PAGE ETUDIANT
 
     private ObservableList<Etudiant> Etudiants;
@@ -483,7 +490,7 @@ public class page2Controller {
         Enseignant_nom.setText("");
         Enseignant_prenom.setText("");
         Enseignant_email.setText("");
-        Enseignant_position.setItems(FXCollections.observableArrayList());
+        Enseignant_position.getSelectionModel().clearSelection();
     }
 
     private ObservableList<Enseignant> Enseignants;
@@ -765,6 +772,24 @@ public class page2Controller {
 
         }
     }
+    public void recherechePfe(){
+        String data =PFE_recherche.getText();
+        System.out.println(data);
+        if(data.isEmpty()){
+            displayPFES();
+        }else {
+            try {
+                PFE_col_titre.setCellValueFactory(new PropertyValueFactory<PFE, String>("titre_pfe"));
+                PFE_col_encadrant.setCellValueFactory(new PropertyValueFactory<PFE, String>("enseignant"));
+                PFE_col_etudiant1.setCellValueFactory(new PropertyValueFactory<PFE, String>("etudiant1"));
+                PFE_col_etudiant2.setCellValueFactory(new PropertyValueFactory<PFE, String>("etudiant2"));
+                PFE_table_view.setItems(queryData.getQueryPFE(data));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
 
 
     // PAGE JURY
@@ -931,6 +956,24 @@ public class page2Controller {
 
         }
     }
+    public void recherecheJury(){
+        String data =jury_recherche.getText();
+        if(data.isEmpty()){
+            displayJurys();
+        }else {
+            try {
+                Jury_col_titre.setCellValueFactory(new PropertyValueFactory<Jury, String>("titre_pfe"));
+                Jury_col_president.setCellValueFactory(new PropertyValueFactory<Jury, String>("president"));
+                Jury_col_rapporteur.setCellValueFactory(new PropertyValueFactory<Jury, String>("rapporteur"));
+                Jury_col_examinateur.setCellValueFactory(new PropertyValueFactory<Jury, String>("examinateur"));
+                Jury_col_encadrant.setCellValueFactory(new PropertyValueFactory<Jury, String>("enseignant"));
+                Jury_col_invite.setCellValueFactory(new PropertyValueFactory<Jury, String>("invite"));
+                Jury_table_view.setItems(queryData.getQueryJury(data));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 
     //PAGE SOUTENANCE
@@ -977,9 +1020,9 @@ public class page2Controller {
             alert.setHeaderText("Veuillez remplir Les Champs ");
             alert.showAndWait();
         } else if (getData.existePfedansSoutenance(titre_pfe)) {
-         alert.setTitle("Erreur");
-         alert.setHeaderText("ce pfe deja a une soutenance");
-         alert.showAndWait();
+            alert.setTitle("Erreur");
+            alert.setHeaderText("ce pfe deja a une soutenance");
+            alert.showAndWait();
 
         } else {
             dateSoutenance=Soutenance_Date.getValue();
@@ -989,21 +1032,39 @@ public class page2Controller {
                 alert.showAndWait();
 
             }else{
-                String valide= (Integer.getInteger(note)>10)?"Validee":"non validee";
+                soutenance sout;
+                String valide="";
+                if(note.isEmpty()){
+                    sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,0,valide);
+                }
+                else{
+                    valide= (Float.parseFloat(note)>10)?"Validee":"non validee";
+                    sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,Float.parseFloat(note),valide);
 
-                soutenance sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,Float.parseFloat(note),valide);
-
+                }
+                setData.addSoutenance(sout);
+                displaySoutenance();
+                alert.setAlertType(Alert.AlertType.INFORMATION);
+                alert.setTitle("Ajout Soutenance");
+                alert.setHeaderText("Ajout Soutenance avec succee");
+                alert.showAndWait();
+                resetPagesoutenance();
 
                 System.out.println(sout.toString());
             }
-
-
-
-
-
-
+        }
 
     }
+    public void resetPagesoutenance(){
+        Soutenance_Heure.getSelectionModel().clearSelection();
+        Soutenance_Minute.getSelectionModel().clearSelection();
+        Soutenance_titrePFE.getSelectionModel().clearSelection();
+        Soutenance_Note.setText("");
+        Soutenance_Salle.setText("");
+        Soutenance_titrePFE.getSelectionModel().clearSelection();
+        Soutenance_Date.setValue(LocalDate.now());
+    }
+
     private ObservableList<soutenance> soutenances;
     public void displaySoutenance(){
         soutenances=getData.getSoutenance();
@@ -1015,8 +1076,102 @@ public class page2Controller {
             Soutenance_col_note.setCellValueFactory(new PropertyValueFactory<soutenance, Float>("note"));
             Soutenance_col_validite.setCellValueFactory(new PropertyValueFactory<soutenance, String>("validite"));
             Soutenance_table_view.setItems(soutenances);
+            fillComboBoxTitrepfeSoutenance();
+            fillComboBoxTime();
         } catch(Exception e){
             e.printStackTrace();
+        }
+    }
+    public void supprimerSoutenance(){
+        String titre = (String) Soutenance_titrePFE.getSelectionModel().getSelectedItem();
+        if(titre.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir le Titre de pfe");
+            alert.showAndWait();
+        }else{
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation");
+            alert.setHeaderText("Etes-vous sûre de supprimer ce Jury");
+            alert.showAndWait().ifPresent(response->{
+                if (response == ButtonType.OK){
+                    deleteData.deleteSoutenance(titre);
+                    displaySoutenance();
+                    resetPagesoutenance();
+                }
+            });
+
+
+        }
+
+    }
+    public void modifierSoutenance(){
+        String titre_pfe=(String) Soutenance_titrePFE.getSelectionModel().getSelectedItem();
+        LocalDate dateSoutenance ;
+        String heure = Soutenance_Heure.getSelectionModel().getSelectedItem();
+        String minute=Soutenance_Minute.getSelectionModel().getSelectedItem();
+        String salle= Soutenance_Salle.getText();
+        String note= Soutenance_Note.getText();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        if (Soutenance_titrePFE.getSelectionModel().isEmpty()|| Soutenance_Date.getValue()==null|| Soutenance_Heure.getSelectionModel().isEmpty() || Soutenance_Minute.getSelectionModel().isEmpty()){
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez remplir Les Champs ");
+            alert.showAndWait();
+        }  else {
+            dateSoutenance=Soutenance_Date.getValue();
+            if ( LocalDate.now().isBefore(dateSoutenance) && !(note.isEmpty()) ) {
+                alert.setTitle("Erreur");
+                alert.setHeaderText("Tu ne peux pas mettre le note avant la date de soutenance");
+                alert.showAndWait();
+
+            }else{
+                soutenance sout;
+                String valide="";
+                if(note.isEmpty()){
+                    sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,0,valide);
+                }
+                else{
+                    valide= (Float.parseFloat(note)>10)?"Validee":"non validee";
+                    sout=new soutenance(titre_pfe,dateSoutenance.toString(),heure+":"+minute,salle,Float.parseFloat(note),valide);
+
+                }
+                updateData.updateSoutenance(sout);
+                displaySoutenance();
+
+                resetPagesoutenance();
+
+                System.out.println(sout.toString());
+            }
+        }
+
+    }
+    public void Soutenance_Clicked() {
+        soutenance s = Soutenance_table_view.getSelectionModel().getSelectedItem();
+        if (s != null) {
+            Soutenance_titrePFE.getSelectionModel().select(s.getTitre_pfe());
+            Soutenance_Date.setValue(s.getDateasDate());
+            Soutenance_Salle.setText(s.getSalle());
+
+        }
+    }
+    public void recherecheSoutenance(){
+        String data =Soutenance_recherche.getText();
+        if(data.isEmpty()){
+            displayJurys();
+        }else {
+            try {
+                Soutenance_col_titre.setCellValueFactory(new PropertyValueFactory<soutenance, String>("titre_pfe"));
+                Soutenance_col_date.setCellValueFactory(new PropertyValueFactory<soutenance, String>("date"));
+                Soutenance_col_heure.setCellValueFactory(new PropertyValueFactory<soutenance, String>("heure"));
+                Soutenance_col_salle.setCellValueFactory(new PropertyValueFactory<soutenance, String>("salle"));
+                Soutenance_col_note.setCellValueFactory(new PropertyValueFactory<soutenance, Float>("note"));
+                Soutenance_col_validite.setCellValueFactory(new PropertyValueFactory<soutenance, String>("validite"));
+                Soutenance_table_view.setItems(queryData.getQuerySoutenance(data));
+                fillComboBoxTitrepfeSoutenance();
+                fillComboBoxTime();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -1155,7 +1310,12 @@ public class page2Controller {
 
 
     public void initialize() {
-        displayEtudiants();
+        int tot= getData.getEtudiant_ID().size();
+        int ta= getData.getPFE_Titre().size();
+
+        total_etudiants.setText(String.valueOf(tot));
+        total_affecte.setText(String.valueOf(ta));
+        total_nonaffecte.setText(String.valueOf(tot-ta));
     }
 
 }

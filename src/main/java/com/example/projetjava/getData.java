@@ -22,6 +22,7 @@ public class getData {
     public static ArrayList<String> enseignantsCIN=new ArrayList<>();
     public static ArrayList<String> pfeid=new ArrayList<>();
 
+
     public static ObservableList<Etudiant> getEtudiants() {
     ObservableList<Etudiant> listEtudiant = FXCollections.observableArrayList();
     String sql = "SELECT * FROM etudiant";
